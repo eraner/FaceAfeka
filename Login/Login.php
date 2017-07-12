@@ -11,7 +11,7 @@
 <body>
     <!--Start login-style -->
     <div class="login-style">
-        <h1>Login Page</h1>
+        <h1>Face Afeka</h1>
         <form>
             <input type="text" placeholder="Username" required/>
             <input type="password" placeholder="Password" required/>
