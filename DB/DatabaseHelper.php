@@ -22,6 +22,11 @@ class DatabaseHelper {
         }
     }
 
+    function __destruct()
+    {
+        mysqli_close($this->connection);
+    }
+
     /** UTILS Functions:  */
 
     /***
@@ -37,7 +42,8 @@ class DatabaseHelper {
         return $result;
     }
 
-    /* Returns the encrypted password of the given string. */
+    /**
+     * Returns the encrypted password of the given string. */
     function CalculatePassword($pass)
     {
         $pass= $pass.strrev($pass);
@@ -45,6 +51,14 @@ class DatabaseHelper {
         return $pass;
     }
 
+    /** Common Functions: */
+
+    /***
+     * Registering a new user to the system with his username and password.
+     * @param $user
+     * @param $pass
+     * @return bool|mysqli_result
+     */
     function RegisterUser($user, $pass){
         $c_pass = $this->CalculatePassword($pass);
 
@@ -57,5 +71,24 @@ class DatabaseHelper {
         return $result;
     }
 
+    /**
+     * Check if the user exists in the system by username and password.
+     * @return true/false.
+     * @param $user
+     * @param $pass
+     */
+    function ValidateUser($user, $pass){
+        if ($user == "" || $pass == "")
+            return false;
 
+        $c_pass = $this->CalculatePassword($pass);
+        $query = "SELECT username FROM Users WHERE (Username = '".$user."'";
+        $query .= " AND Password = '".$c_pass."' );";
+
+        $result = $this->db_query($query);
+        if (mysqli_num_rows($result) == 1){
+            return true;
+        }
+        return false;
+    }
 }

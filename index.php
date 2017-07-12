@@ -12,7 +12,7 @@
     <!--Start login-style -->
     <div class="login-style">
         <h1>Face Afeka</h1>
-        <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="POST">
+        <form action="Login/Login.php" method="POST">
             <input type="text" name="username" placeholder="Username" required/>
             <input type="password" name="password" placeholder="Password" required/>
             <div class="submit">
