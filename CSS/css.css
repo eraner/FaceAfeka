@@ -82,7 +82,7 @@ body{
     cursor: pointer;
     outline: none;
     padding: 0.8em 1em;
-    border-radius:1px solid #000;
+    border-radius: 1px solid #000;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     -o-border-radius: 4px;
@@ -130,3 +130,30 @@ body{
     text-shadow: 0 1.5px 0 #000;
 }
 
+/*Feed Page styles*/
+ul {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.active {
+    background-color: #4CAF50;
+}
