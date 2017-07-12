@@ -1,0 +1,10 @@
+/* create the DB */
+CREATE DATABASE FaceAfeka;
+USE FaceAfeka;
+
+CREATE TABLE Users(
+  UserID INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  Username VARCHAR(45) NOT NULL,
+  Password VARCHAR(255) NOT NULL,
+  PRIMARY KEY (UserID)
+);
