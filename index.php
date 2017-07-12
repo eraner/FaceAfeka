@@ -12,9 +12,9 @@
     <!--Start login-style -->
     <div class="login-style">
         <h1>Face Afeka</h1>
-        <form>
-            <input type="text" placeholder="Username" required/>
-            <input type="password" placeholder="Password" required/>
+        <form action="Login/Login.php" method="POST">
+            <input type="text" name="username" placeholder="Username" required/>
+            <input type="password" name="password" placeholder="Password" required/>
             <div class="submit">
                 <input type="submit" value="Login" >
             </div>
