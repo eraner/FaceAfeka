@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <link href="CSS/css.css" rel='stylesheet' type='text/css' />
+    <link href="../CSS/css.css" rel='stylesheet' type='text/css' />
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -11,18 +11,13 @@
 <body>
     <!--Start login-style -->
     <div class="login-style">
-        <h1>Face Afeka</h1>
+        <h1>Sign Up</h1>
         <form>
             <input type="text" placeholder="Username" required/>
             <input type="password" placeholder="Password" required/>
+            <input type="password" placeholder="Repeat Password" required/>
             <div class="submit">
-                <input type="submit" value="Login" >
-            </div>
-
-            <div class="signup">
-                Not registered yet? </br>
-                <a href="Login/SignUp.php">Sign up</a>
-                for free now!
+                <input type="submit" value="Register" >
             </div>
         </form>
     </div>
