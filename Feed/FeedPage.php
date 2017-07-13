@@ -1,5 +1,6 @@
 <?php
 include ("StatusDetails.php");
+require_once ("..\utils\HtmlHelper.php");
 //$statusDetailsArr = $_POST['allStatuses'];
 $statusDetailsArr = [new StatusDetails("blala", "dog.jpg", "Eran"),
                         new StatusDetails("lala", "", "Ohad"),
@@ -24,29 +25,6 @@ PrintStatusesListHTML($statusDetailsArr);
 echo "</div>";
 echo "</body>
         </html>";
-
-function AddTopNavigationBar(){
-    echo "<div class='navbar'>
-           <ul>
-            <li><a class=\"active\" href='#'>FaceAfeka</a> </li>
-            <li><a href='#'>Profile</a> </li>
-            <li><a href='#'>Friends</a> </li>
-           </ul>
-           </div>";
-}
-
-function PrintHeadHTML(){
-    echo "<!doctype html>
-        <html lang=\"en\">
-        <head>
-            <meta charset=\"UTF-8\">
-            <meta name=\"viewport\"
-                content=\"width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0\">
-            <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">
-            <title>Document</title>
-            <link href=\"../CSS/css.css\" rel=\"stylesheet\" type='text/css'/>
-        </head>";
-}
 
 function PrintStatusesListHTML($statusDetailsArr){
     foreach ($statusDetailsArr as $statusDetails) {
