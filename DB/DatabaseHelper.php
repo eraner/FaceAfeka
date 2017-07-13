@@ -64,7 +64,6 @@ class DatabaseHelper {
 
         $insert_q = "INSERT INTO Users (Username, Password) VALUES (";
         $insert_q .= "'".$user."', '".$c_pass."' );";
-        //echo $insert_q;
 
         $result = $this->db_query($insert_q);
 
@@ -90,5 +89,23 @@ class DatabaseHelper {
             return true;
         }
         return false;
+    }
+
+    function GetUsersFriends($user){
+        $friends = array();
+        $select_query = "SELECT user2 FROM Friends WHERE (User1 = '".$user."' );";
+        $result = $this->db_query($select_query);
+
+        while ($row = $result->fetch_assoc()){
+            $friends[] = $row["user2"];
+        }
+
+        $select_query = "SELECT user1 FROM Friends WHERE (User2 = '".$user."' );";
+        $result = $this->db_query($select_query);
+        while ($row = $result->fetch_assoc()){
+            $friends[] = $row["user1"];
+        }
+
+        return $friends;
     }
 }
