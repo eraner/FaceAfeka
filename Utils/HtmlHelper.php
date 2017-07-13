@@ -16,7 +16,7 @@ function PrintHeadHTML(){
         </head>";
 }
 
-function AddTopNavigationBar(){
+function AddTopNavigationBar($loggedUser){
     /** Navigation Bar Init*/
     echo "<div class='navbar'>
            <ul>
@@ -33,11 +33,14 @@ function AddTopNavigationBar(){
             <div class='modal-dialog'>";
     /**Set Post window content*/
     echo "<div class=\"post-style\">
-    <form action=\"/UploadPost.php\">
+    <form action=\"UploadPost.php\" method='post'>
+        <input type='hidden' name='loggedUser' value='".$loggedUser."'/>
         <center><table>
             <tr><td><h1>Your Post</h1></td></tr>
             <tr>
-                <td><textarea name=\"status\" placeholder=\"Enter your status here\" rows=\"10\" cols=\"70\"></textarea></td>
+                <td>
+                <textarea name=\"status\" placeholder=\"Enter your status here\" rows=\"10\" cols=\"70\" required></textarea>
+                </td>
             </tr>
             <!--TODO:Multiple pictures -->
             <tr>
@@ -49,7 +52,7 @@ function AddTopNavigationBar(){
                     <input type=\"radio\" name=\"privacy\" value=\"Private\">Private</td> 
                 </tr>
             </table>
-            <tr></br></br></br>
+            <tr></br>
                 <td><input type=\"submit\" value=\"Post Now!\"></td>
             </tr>
         </table>

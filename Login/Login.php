@@ -10,7 +10,7 @@ if (isset($_POST["username"]) && isset($_POST["password"])){
 
     if ($result){
         $_SESSION['loggedUser'] = $username;
-        header("Location: ../Feed/friends.php");
+        header("Location: ../Feed/FeedPage.php");
         return;
     } else {
         echo "Not Cool At All!!!";

@@ -1,16 +1,25 @@
 <?php
-include ("StatusDetails.php");
+require_once ("StatusDetails.php");
 require_once ("..\utils\HtmlHelper.php");
-//$statusDetailsArr = $_POST['allStatuses'];
+
 $statusDetailsArr = [new StatusDetails("blala", "dog.jpg", "Eran"),
                         new StatusDetails("lala", "", "Ohad"),
                         new StatusDetails("blala", "dog.jpg", "Eran"),
                         new StatusDetails("lala", "", "nir"),
-new StatusDetails("blala", "dog.jpg", "Eran"),
+                        new StatusDetails("blala", "dog.jpg", "Eran"),
                         new StatusDetails("lala", "", "omri"),
-new StatusDetails("blala", "dog.jpg", "Eran"),
+                        new StatusDetails("blala", "dog.jpg", "Eran"),
                         new StatusDetails("lala", "", "marlen")];
-/*$status = $_POST['status'];
+session_start();
+
+if (!isset($_SESSION["loggedUser"]) ){
+    header("HTTP/1.0 404 Not Found");
+    die();
+}
+$loggedUser = $_SESSION['loggedUser'];
+
+/*$statusDetailsArr = $_POST['allStatuses'];
+$status = $_POST['status'];
 $imgSrc = $_POST['imgsrc'];
 $name = $_POST['name'];
 $statusDetails = new StatusDetails($status, $imgSrc, $name);*/
@@ -18,13 +27,14 @@ $statusDetails = new StatusDetails($status, $imgSrc, $name);*/
 PrintHeadHTML();
 echo "<body>";
 
-AddTopNavigationBar();
+AddTopNavigationBar($loggedUser);
 
 echo "<div style='padding-top: 30px'>";
 PrintStatusesListHTML($statusDetailsArr);
 echo "</div>";
-echo "</body>
-        </html>";
+
+echo "</body>";
+echo "</html>";
 
 function PrintStatusesListHTML($statusDetailsArr){
     foreach ($statusDetailsArr as $statusDetails) {
