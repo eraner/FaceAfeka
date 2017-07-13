@@ -12,3 +12,20 @@ function PrintHeadHTML(){
             <link href=\"../CSS/css.css\" rel=\"stylesheet\" type='text/css'>
         </head>";
 }
+
+function AddTopNavigationBar($user){
+    $db = new DatabaseHelper();
+    $friends = $db->GetUsersFriends($user);
+
+    echo "<div class='navbar'>
+           <ul>
+            <li><a class=\"active\" href='#'>FaceAfeka</a> </li>
+            <li><a href='#'>Profile</a> </li>";
+    echo "    <ul class=\"sub-menu\">
+                    <a href=\"#\">1st Friend </a>
+                    <a href=\"#\">2nd Friend</a>
+              </ul>";
+    echo "<li><a href='#'>Friends</a> </li>
+           </ul>
+</div>";
+}
