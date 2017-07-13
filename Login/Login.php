@@ -6,8 +6,7 @@ if (isset($_POST["username"]) && isset($_POST["password"])){
     $result = $db->ValidateUser($_POST["username"], $_POST["password"]);
 
     if ($result){
-        #header("Location: ?????");
-        echo "WooooHoooooo!!!";
+        header("Location: ../Feed/FeedPage.php");
         return;
     } else {
         echo "Not Cool At All!!!";
