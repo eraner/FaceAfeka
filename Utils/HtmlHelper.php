@@ -16,19 +16,18 @@ function PrintHeadHTML(){
         </head>";
 }
 
-function AddTopNavigationBar($user){
-    $db = new DatabaseHelper();
-    $friends = $db->GetUsersFriends($user);
+function AddTopNavigationBar(){
     /** Navigation Bar Init*/
     echo "<div class='navbar'>
            <ul>
             <li><a class=\"active\" href='#'>FaceAfeka</a> </li>
-            <li><a href='#'>Profile</a> </li>";
-    echo "    <ul class=\"sub-menu\">
+            <li><a href='#'>Profile</a> </li>
+            <li><a href='#'>Friends</a> </li>
+            <li><button type='button' data-toggle='modal'
             data-target='#myPost'>Post</button></li>
-              </ul>";
+           </ul>";
     echo "</div>"; /**navbar /div*/
-    echo "<li><a href='#'>Friends</a> </li>
+
     /**Setup Post window popup*/
     echo "<div class='modal fade' id='myPost' role='dialog'>
             <div class='modal-dialog'>";
@@ -39,6 +38,7 @@ function AddTopNavigationBar($user){
             <tr><td><h1>Your Post</h1></td></tr>
             <tr>
                 <td><textarea name=\"status\" placeholder=\"Enter your status here\" rows=\"10\" cols=\"70\"></textarea></td>
+            </tr>
             <!--TODO:Multiple pictures -->
             <tr>
                 <td><input type=\"file\" name=\"pic\" accept=\"image/*\"></td>
@@ -55,7 +55,7 @@ function AddTopNavigationBar($user){
         </table>
         </center>
     </form>
-</div>";
+    </div>";
     echo "</div>"; /**modal fade /div*/
     echo "</div>"; /**post-style /div*/
 }
