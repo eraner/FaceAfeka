@@ -46,7 +46,7 @@ function AddTopNavigationBar($loggedUser){
             <div class='modal-dialog'>";
     /**Set Post window content*/
     echo "<div class=\"post-style\">
-    <form action=\"UploadPost.php\" method='post'>
+    <form action=\"UploadPost.php\" method='post' multipart=\"multiple\" enctype=\"multipart/form-data\">
         <input type='hidden' name='loggedUser' value='".$loggedUser."'/>
         <center><table>
             <tr><td><h1>Your Post</h1></td></tr>
@@ -57,7 +57,7 @@ function AddTopNavigationBar($loggedUser){
             </tr>
             <!--TODO:Multiple pictures -->
             <tr>
-                <td><input type=\"file\" name=\"pic\" accept=\"image/*\"></td>
+                <td><input type=\"file\" name=\"pic[]\" multiple accept=\"image/*\"></td>
             </tr></br>
             <table>
                 <tr>
