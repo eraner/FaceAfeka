@@ -1,6 +1,7 @@
 <?php
 require_once ("StatusDetails.php");
 require_once ("..\utils\HtmlHelper.php");
+require_once ("..\Utils\ImgUploader.php");
 
 session_start();
 
@@ -35,7 +36,7 @@ function PrintStatusesListHTML($statusDetailsArr){
         echo "<h2>".$statusDetails->publisher."</h2>";
         /**Add image if imgSrc isn't Blank*/
         if($statusDetails->imgSrc != "") {
-            echo "<p><img src=\"" . $statusDetails->imgSrc . "\"> <a href=\"#\">Picture here</a></p>";
+            echo "<p><img src=\"".UPLOADED_IMAGES_LOCATION.$statusDetails->imgSrc."\"> <a href=\"#\">Picture here</a></p>";
         }
         /**Add status*/
         echo $statusDetails->status;

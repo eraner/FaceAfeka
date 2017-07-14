@@ -43,6 +43,8 @@ CREATE TABLE Comments(
 );
 
 INSERT INTO Posts (Status, ImgSrc, Publisher, Privacy, Date) VALUES
-  ('MyStatus', '', 'EranLaudin', 'Public', '2017-07-15');
+  ('This is a dog status.', 'dog.jpg', 'EranLaudin', 'Public', '2017-07-15');
 INSERT INTO Posts (Status, ImgSrc, Publisher, Privacy, Date) VALUES
   ('MyStatus before', '', 'EranLaudin', 'Public', '2017-07-13');
+INSERT INTO Posts (Status, ImgSrc, Publisher, Privacy, Date) VALUES
+  ('This is a cat status', '201707141001241501264039.png', 'OhadCohen', 'Public', '2017-07-14');
