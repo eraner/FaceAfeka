@@ -4,12 +4,18 @@ class StatusDetails
 {
     public $status;
     public $imgSrc;
-    public $name;
+    public $publisher;
+    public $likes;
+    public $date;
+    public $privacy;
 
-    function __construct($status, $imgSrc, $name)
+    function __construct($status, $imgSrc, $publisher, $likes, $date, $privacy)
     {
         $this->status = $status;
         $this->imgSrc = $imgSrc;
-        $this->name = $name;
+        $this->publisher = $publisher;
+        $this->likes = $likes;
+        $this->date = $date;
+        $this->privacy = $privacy;
     }
 }

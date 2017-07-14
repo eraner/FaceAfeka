@@ -1,21 +1,35 @@
 <?php
 require_once ("..\Utils\HtmlHelper.php");
+require_once ("..\DB\DatabaseHelper.php");
 require_once ("..\Utils\ImgUploader.php");
+
 
 $status = $_POST['status'];
 $imgScr = $_FILES['pic'];
 $privacy = $_POST['privacy'];
 $username = $_POST['loggedUser'];
 
-
-PrintHeadHTML();
 $imgs = UploadImgs($imgScr);
 
+$db = new DatabaseHelper();
+$result = $db->InsertNewPost($status, $imgs[0], $username, $privacy);
+if($result == true){
+    header("Location: FeedPage.php");
+    return;
+}
 
-echo $status."</br>";
-echo $privacy."</br>";
-var_dump($imgs);
-echo $username."</br>";
+echo "Error to post the status";
 
-
-echo "</html>";
+//PrintHeadHTML();
+//
+//
+//
+//echo $status."</br>";
+//if($imgScr != "") {
+//    echo $imgScr . "</br>";
+//}
+//echo $privacy."</br>";
+//echo $username."</br>";
+//
+//
+//echo "</html>";

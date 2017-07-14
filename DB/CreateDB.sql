@@ -22,3 +22,27 @@ CREATE TABLE Friends(
 
 INSERT INTO friends VALUES ('NirLevi', 'EranLaudin');
 INSERT INTO friends VALUES ('EranLaudin', 'OhadCohen');
+
+CREATE TABLE Posts(
+  PostID INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  Status VARCHAR(45),
+  ImgSrc VARCHAR(45),
+  Publisher VARCHAR(45) NOT NULL,
+  Privacy VARCHAR(45) NOT NULL,
+  Likes INTEGER NOT NULL DEFAULT 0,
+  Date DATE NOT NULL,
+  PRIMARY KEY (PostID)
+);
+
+CREATE TABLE Comments(
+  PostID INTEGER UNSIGNED NOT NULL,
+  Comment VARCHAR(45) NOT NULL,
+  Username VARCHAR(45) NOT NULL,
+  Date DATE,
+  FOREIGN KEY (PostID) REFERENCES Posts(PostID)
+);
+
+INSERT INTO Posts (Status, ImgSrc, Publisher, Privacy, Date) VALUES
+  ('MyStatus', '', 'EranLaudin', 'Public', '2017-07-15');
+INSERT INTO Posts (Status, ImgSrc, Publisher, Privacy, Date) VALUES
+  ('MyStatus before', '', 'EranLaudin', 'Public', '2017-07-13');

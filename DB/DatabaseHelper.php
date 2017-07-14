@@ -108,4 +108,59 @@ class DatabaseHelper {
 
         return $friends;
     }
+
+    /**
+     * @return true/false.
+     * @param $publisher - name of uploader.
+     * @param $status - string of status.
+     * @param $imgSrc - string representing path to img (can be "").
+     * @param $privacy - Public/Private.
+     */
+    function InsertNewPost($status, $imgSrc, $publisher, $privacy){
+
+        $status = addslashes($status);
+        $imgSrc = addslashes($imgSrc);
+        $publisher = addslashes($publisher);
+
+        $insert_q = "INSERT INTO Posts (Status, ImgSrc, Publisher, Privacy, Date) VALUES (";
+        $insert_q .= "'".$status."', '".$imgSrc."', '".$publisher."', '".$privacy."', now() );";
+
+        $result = $this->db_query($insert_q);
+
+        return $result;
+    }
+
+    /**Gets Array of friends and returns array of posts of friends.
+     * @return success - Array of StatusDetails from requested publisher (can be empty list),
+     *          fail return -1;
+     * @param $publisher - username of publisher.
+     */
+    function GetFriendsPosts($friends){
+        if($friends==null){
+            return -1;
+        }
+        $posts = array();
+
+        $numOfFriends = count($friends);
+        $friendsList = "( ";
+        for($i=0 ; $i < $numOfFriends ; $i++)
+            if( $i != $numOfFriends-1 )
+                $friendsList .= "'".$friends[$i]."', ";
+            else
+                $friendsList .= "'".$friends[$i]."' )";
+
+        $select_query = "SELECT * FROM Posts WHERE (Publisher) IN ".$friendsList." ORDER BY Date DESC";
+        $result = $this->db_query($select_query);
+
+        if(!$result){
+            return $posts;
+        }
+
+        while ($row = $result->fetch_assoc()){
+            $posts[] = new StatusDetails($row['Status'], $row['ImgSrc'], $row['Publisher'],
+                $row['Likes'], $row['Date'], $row['Privacy']);
+        }
+
+        return $posts;
+    }
 }
