@@ -13,7 +13,7 @@ $loggedUser = $_SESSION['loggedUser'];
 
 $db = new DatabaseHelper();
 $friends = $db->GetUsersFriends($loggedUser);
-
+$friends[] = $loggedUser;
 $statusDetailsArr = $db->GetFriendsPosts($friends);
 
 PrintHeadHTML();
