@@ -1,4 +1,6 @@
 <?php
+require_once('..\DB\DatabaseHelper.php');
+
 
 function PrintHeadHTML(){
     echo "<!doctype html>
@@ -13,6 +15,7 @@ function PrintHeadHTML(){
             <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">
             <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js\"></script>
             <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js\"></script>
+            <script src=\"../JS/FriendsBar.js\"></script>
         </head>";
 }
 
@@ -22,11 +25,21 @@ function AddTopNavigationBar($loggedUser){
            <ul>
             <li><a class=\"active\" href='#'>FaceAfeka</a> </li>
             <li><a href='#'>Profile</a> </li>
-            <li><a href='#'>Friends</a> </li>
+            <li><a href='#' onclick='openNav()'>Friends</a> </li>
             <li><button type='button' data-toggle='modal'
             data-target='#myPost'>Post</button></li>
            </ul>";
     echo "</div>"; /**navbar /div*/
+
+    /**Setup Friends SideBar */
+    echo "<div id=\"mySidenav\" class=\"sidenav\">
+    <a href=\"#\" class=\"closebtn\" onclick=\"closeNav()\">&times;</a>";
+    $db = new DatabaseHelper();
+    $friends = $db->GetUsersFriends($loggedUser);
+    foreach ($friends as $friend){
+        echo "<a href=\"#\"><img class='friendImg' src=\"../Resources/Images/profile-icon.png\">".$friend."</a>\n";
+    }
+    echo "</div>";
 
     /**Setup Post window popup*/
     echo "<div class='modal fade' id='myPost' role='dialog'>
