@@ -23,11 +23,16 @@ function AddTopNavigationBar($loggedUser){
     /** Navigation Bar Init*/
     echo "<div class='navbar'>
            <ul>
-            <li><a class=\"active\" href='#'>FaceAfeka</a> </li>
-            <li><a href='#'>Profile</a> </li>
-            <li><a href='#' onclick='openNav()'>Friends</a> </li>
-            <li><button type='button' data-toggle='modal'
-            data-target='#myPost'>Post</button></li>
+                <li><a class=\"active\" href='#'>FaceAfeka</a> </li>
+                <li><a href='#'> <span class=\"glyphicon glyphicon-user\"></span> Profile</a> </li>
+                <li><a href='#' onclick='openNav()'> <span class=\"glyphicon glyphicon-link\"></span> Friends</a> </li>
+                <li><button type='button' data-toggle='modal' data-target='#myPost'>
+                    <span class=\"glyphicon glyphicon-plus-sign\"></span> Post</button>
+                </li>
+                <li><a href='#' class='logout' onclick='document.location.href=\"../Login/Logout.php\"'>
+                    <span class=\"glyphicon glyphicon-log-out\"></span>  Logout</a> 
+                </li>
+                
            </ul>";
     echo "</div>"; /**navbar /div*/
 
@@ -74,4 +79,7 @@ function AddTopNavigationBar($loggedUser){
     </div>";
     echo "</div>"; /**modal fade /div*/
     echo "</div>"; /**post-style /div*/
+
+
+
 }

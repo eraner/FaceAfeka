@@ -12,7 +12,7 @@
     <!--Start login-style -->
     <div class="login-style">
         <h1>Sign Up</h1>
-        <form action="signup_handler.php" method="POST">
+        <form action="Signup_Handler.php" method="POST">
             <input type="text" name="username" placeholder="Username" required/>
             <input type="password" name="password" placeholder="Password" required/>
             <input type="password" name="rePassword" placeholder="Repeat Password" required/>

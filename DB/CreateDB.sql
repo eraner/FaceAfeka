@@ -34,6 +34,14 @@ CREATE TABLE Posts(
   PRIMARY KEY (PostID)
 );
 
+INSERT INTO Posts (Status, ImgSrc, Publisher, Privacy, Date) VALUES
+  ('This is a dog status.', 'dog.jpg', 'EranLaudin', 'Public', '2017-07-15');
+INSERT INTO Posts (Status, ImgSrc, Publisher, Privacy, Date) VALUES
+  ('MyStatus before', '', 'EranLaudin', 'Public', '2017-07-13');
+INSERT INTO Posts (Status, ImgSrc, Publisher, Privacy, Date) VALUES
+  ('This is a cat status', '201707141001241501264039.png', 'OhadCohen', 'Public', '2017-07-14');
+
+
 CREATE TABLE Comments(
   PostID INTEGER UNSIGNED NOT NULL,
   Comment VARCHAR(45) NOT NULL,
@@ -42,9 +50,3 @@ CREATE TABLE Comments(
   FOREIGN KEY (PostID) REFERENCES Posts(PostID)
 );
 
-INSERT INTO Posts (Status, ImgSrc, Publisher, Privacy, Date) VALUES
-  ('This is a dog status.', 'dog.jpg', 'EranLaudin', 'Public', '2017-07-15');
-INSERT INTO Posts (Status, ImgSrc, Publisher, Privacy, Date) VALUES
-  ('MyStatus before', '', 'EranLaudin', 'Public', '2017-07-13');
-INSERT INTO Posts (Status, ImgSrc, Publisher, Privacy, Date) VALUES
-  ('This is a cat status', '201707141001241501264039.png', 'OhadCohen', 'Public', '2017-07-14');
