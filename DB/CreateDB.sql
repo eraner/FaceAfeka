@@ -12,6 +12,8 @@ CREATE TABLE Users(
 INSERT into Users (Username, Password) values ('EranLaudin', '393cf13dea198de16792babb0e6628d5');
 INSERT into Users (Username, Password) values ('OhadCohen', 'f45fb23a59cc8bcd9de4952b33f473dc');
 INSERT into Users (Username, Password) values ('NirLevi', 'd75f00b502dc1f485f80141dac1a38bc');
+INSERT into Users (Username, Password) values ('YaelGersh', '354b9213c1464bccf703d6ca97186827');
+INSERT into Users (Username, Password) values ('AviElgal', '2700ba29cd5b2b69e9dbcbc31d221ae5');
 
 CREATE TABLE Friends(
   User1 VARCHAR(45) NOT NULL,
@@ -21,7 +23,12 @@ CREATE TABLE Friends(
 );
 
 INSERT INTO friends VALUES ('NirLevi', 'EranLaudin');
+INSERT INTO friends VALUES ('NirLevi', 'OhadCohen');
 INSERT INTO friends VALUES ('EranLaudin', 'OhadCohen');
+INSERT INTO friends VALUES ('YaelGersh', 'OhadCohen');
+INSERT INTO friends VALUES ('EranLaudin', 'YaelGersh');
+INSERT INTO friends VALUES ('EranLaudin', 'AviElgal');
+
 
 CREATE TABLE Posts(
   PostID INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -30,23 +37,25 @@ CREATE TABLE Posts(
   Publisher VARCHAR(45) NOT NULL,
   Privacy VARCHAR(45) NOT NULL,
   Likes INTEGER NOT NULL DEFAULT 0,
-  Date DATE NOT NULL,
+  Date DATETIME NOT NULL,
   PRIMARY KEY (PostID)
 );
 
 INSERT INTO Posts (Status, ImgSrc, Publisher, Privacy, Date) VALUES
-  ('This is a dog status.', 'dog.jpg', 'EranLaudin', 'Public', '2017-07-15');
+  ('This is a dog status.', 'dog.jpg', 'EranLaudin', 'Public', '2017-07-15 15:00:00');
 INSERT INTO Posts (Status, ImgSrc, Publisher, Privacy, Date) VALUES
-  ('MyStatus before', '', 'EranLaudin', 'Public', '2017-07-13');
+  ('MyStatus before', '', 'EranLaudin', 'Public', '2017-07-13 20:05:32');
 INSERT INTO Posts (Status, ImgSrc, Publisher, Privacy, Date) VALUES
-  ('This is a cat status', '201707141001241501264039.png', 'OhadCohen', 'Public', '2017-07-14');
+  ('This is a cat status', '201707141001241501264039.png', 'OhadCohen', 'Public', '2017-07-14 14:22:22');
+INSERT INTO Posts (Status, ImgSrc, Publisher, Privacy, Date) VALUES
+  ('Hello World', '201707141001241501264039.png', 'OhadCohen', 'Public', '2017-07-17 20:12:38');
 
 
 CREATE TABLE Comments(
   PostID INTEGER UNSIGNED NOT NULL,
   Comment VARCHAR(45) NOT NULL,
   Username VARCHAR(45) NOT NULL,
-  Date DATE,
+  Date DATETIME,
   FOREIGN KEY (PostID) REFERENCES Posts(PostID)
 );
 
