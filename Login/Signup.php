@@ -20,6 +20,13 @@
                 <input type="submit" value="Register" >
             </div>
         </form>
+        <?php
+            session_start();
+            if (isset($_SESSION['error'])){
+                echo "</br><span id=\"errorLabel\" style=\"color:red; font-size: 25px; font-family: 'Comic Sans MS', sans-serif;\">".$_SESSION['error']."</span>";
+            }
+            unset($_SESSION['error']);
+        ?>
     </div>
     <!--End login-style -->
 </body>

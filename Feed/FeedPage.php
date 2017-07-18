@@ -24,9 +24,11 @@ if ($statusDetailsArr == -1){
 PrintHeadHTML();
 echo "<body>";
 
+PrintScript();
+
 AddTopNavigationBar($loggedUser);
 
-echo "<div class='main' style='padding-top: 30px'>";
+echo "<div class='main' id='feed' style='padding-top: 30px'>";
 PrintStatusesListHTML($statusDetailsArr);
 echo "</div>";
 
@@ -34,19 +36,43 @@ echo "</body>";
 echo "</html>";
 
 function PrintStatusesListHTML($statusDetailsArr){
+
     foreach ($statusDetailsArr as $statusDetails) {
         echo "<div>";
         /**Add user Name*/
         echo "$statusDetails->date";
-        echo "<h2>".$statusDetails->publisher."</h2>";
+        echo "<h2>" . $statusDetails->publisher . "</h2>";
         /**Add image if imgSrc isn't Blank*/
-        if($statusDetails->imgSrc != "") {
-            echo "<p><img src=\"".UPLOADED_IMAGES_LOCATION.$statusDetails->imgSrc."\"> <a href=\"#\">Picture here</a></p>";
+        if ($statusDetails->imgSrc != "") {
+            echo "<p><img src=\"" . UPLOADED_THUMBS_LOCATION . $statusDetails->imgSrc . "\"> <a href=\"#\">Picture here</a></p>";
         }
         /**Add status*/
         echo $statusDetails->status;
         echo "</div>";
         echo "<hr>";
     }
+}
+
+function PrintScript(){
+    echo "<script>
+                var cacheData;
+                var data = $('#main').html();
+                $('#submitPost').click(function() {
+                    alert('works');
+                  $.ajax({
+                    url: 'getPosts.php',
+                    method: 'POST',
+                    data: data,
+                    dataType: 'html',
+                    success: function(data) {
+                      if(data !== cacheData){
+                          cacheData = data;
+                          var result = $('<div />').append(data).find('#main').html();
+                          $('#main').html(result);
+                      }
+                    }
+                  });
+                }); 
+            </script>";
 }
 
