@@ -1,22 +1,37 @@
 <?php
 require_once('..\DB\DatabaseHelper.php');
 
+session_start();
+
 if (isset($_POST["username"]) && isset($_POST["password"])
     && isset($_POST['rePassword'])){
-    $db = new DatabaseHelper();
-    $result = $db->RegisterUser($_POST["username"], $_POST["password"]);
 
-    if ($result){
-        header("Location: ..\\index.php");
+    if($_POST["password"] != $_POST["rePassword"]){
+        $_SESSION['error'] = "Passwords don't match";
+        header("Location: Signup.php");
         return;
     }else{
-        echo "Something wen't wrong, the user couldn't register on the server DB.";
+        $db = new DatabaseHelper();
+        if(!$db->IsUsernameAvailable($_POST['username'])){
+            $_SESSION['error'] = "Username is not available";
+            header("Location: Signup.php");
+            return;
+        }
+
+        $result = $db->RegisterUser($_POST["username"], $_POST["password"]);
+
+        if ($result) {
+            header("Location: ..\\index.php");
+            return;
+        } else {
+            $_SESSION['error'] = "Something wen't wrong, the user couldn't register on the server DB.";
+            header("Location: Signup.php");
+        }
     }
 
 }else{
-    echo "username or pass not found";
+    $_SESSION['error'] = "Fields are empty!";
+    header("Location: Signup.php");
+    return;
 }
 
-
-header("HTTP/1.0 404 Not Found");
-die();

@@ -91,6 +91,27 @@ class DatabaseHelper {
         return false;
     }
 
+    /**
+     * Checks if username is available (not exists in DB already).
+     * @return false if exists or empty name,
+     * @return true if available.
+     * @param $username
+     */
+    function IsUsernameAvailable($username){
+        if($username == ''){
+            return false;
+        }
+        $query = "SELECT username FROM Users WHERE Username = '".$username."'";
+        $result = $this->db_query($query);
+        if(mysqli_num_rows($result) >= 1) {
+            /**Not Available*/
+            return false;
+        }else{
+            /** Available*/
+            return true;
+        }
+    }
+
     function GetUsersFriends($user){
         $friends = array();
         $select_query = "SELECT user2 FROM Friends WHERE (User1 = '".$user."' );";

@@ -20,16 +20,3 @@ if($result == true){
 
 echo "Error to post the status";
 
-//PrintHeadHTML();
-//
-//
-//
-//echo $status."</br>";
-//if($imgScr != "") {
-//    echo $imgScr . "</br>";
-//}
-//echo $privacy."</br>";
-//echo $username."</br>";
-//
-//
-//echo "</html>";
