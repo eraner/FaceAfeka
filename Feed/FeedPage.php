@@ -12,9 +12,14 @@ if (!isset($_SESSION["loggedUser"]) ){
 $loggedUser = $_SESSION['loggedUser'];
 
 $db = new DatabaseHelper();
+$tempArr = array($loggedUser);
 $friends = $db->GetUsersFriends($loggedUser);
-$friends[] = $loggedUser;
+$friends = array_merge($tempArr, $friends);
 $statusDetailsArr = $db->GetFriendsPosts($friends);
+if ($statusDetailsArr == -1){
+    header("HTTP/1.0 404 Not Found");
+    die();
+}
 
 PrintHeadHTML();
 echo "<body>";
