@@ -42,11 +42,11 @@ CREATE TABLE Posts(
 );
 
 INSERT INTO Posts (Status, ImgSrc, Publisher, Privacy, Date) VALUES
-  ('This is a dog status.', 'dog.jpg', 'EranLaudin', 'Public', '2017-07-15 15:00:00');
+  ('This is a dog status.', '20170719153646889933074.jpg', 'EranLaudin', 'Public', '2017-07-15 15:00:00');
 INSERT INTO Posts (Status, ImgSrc, Publisher, Privacy, Date) VALUES
   ('MyStatus before', '', 'EranLaudin', 'Public', '2017-07-13 20:05:32');
 INSERT INTO Posts (Status, ImgSrc, Publisher, Privacy, Date) VALUES
-  ('This is a cat status', '201707141001241501264039.png', 'OhadCohen', 'Public', '2017-07-14 14:22:22');
+  ('This is a cat status', '201707181724441840804854.png', 'OhadCohen', 'Public', '2017-07-14 14:22:22');
 INSERT INTO Posts (Status, ImgSrc, Publisher, Privacy, Date) VALUES
   ('Hello World', '201707141001241501264039.png', 'OhadCohen', 'Public', '2017-07-17 20:12:38');
 
