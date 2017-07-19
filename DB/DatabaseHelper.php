@@ -152,25 +152,29 @@ class DatabaseHelper {
     }
 
     /**Gets Array of friends and returns array of posts of friends.
-     * @return success - Array of StatusDetails from requested publisher (can be empty list),
+     * first friend is the user all the others are his friends
+     * @return StatusDetails[] - on success - Array of StatusDetails from requested publisher (can be empty list),
      *          fail return -1;
      * @param $publisher - username of publisher.
      */
     function GetFriendsPosts($friends){
-        if($friends==null){
+        if($friends==null || count($friends) < 1){
             return -1;
         }
         $posts = array();
 
+        $user = $friends[0];
         $numOfFriends = count($friends);
         $friendsList = "( ";
-        for($i=0 ; $i < $numOfFriends ; $i++)
+        for($i=1 ; $i < $numOfFriends ; $i++)
             if( $i != $numOfFriends-1 )
                 $friendsList .= "'".$friends[$i]."', ";
             else
                 $friendsList .= "'".$friends[$i]."' )";
 
-        $select_query = "SELECT * FROM Posts WHERE (Publisher) IN ".$friendsList." ORDER BY Date DESC";
+        $select_query = "SELECT * FROM Posts WHERE ((Publisher) IN ".$friendsList." AND Privacy='Public') ";
+        $select_query .= " OR (Publisher='".$user."') ORDER BY Date DESC;";
+
         $result = $this->db_query($select_query);
 
         if(!$result){

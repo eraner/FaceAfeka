@@ -1,0 +1,65 @@
+.post {
+    background: #4CAF50;
+    margin-top: 15px;
+}
+.post:first-child {
+    margin-top: 0;
+}
+.post,
+.post-header-body {
+    zoom: 1;
+    overflow: hidden;
+}
+.post-header-body {
+    width: 100%;
+}
+.post-object {
+    height: 100px;
+    width: 100px;
+    display: block;
+}
+.post-right,
+.post > .pull-right {
+    padding-left: 10px;
+}
+.post-left,
+.post > .pull-left {
+    padding-right: 10px;
+}
+.post-left,
+.post-right,
+.post-header-body {
+    display: table-cell;
+    vertical-align: top;
+}
+.post-middle {
+    vertical-align: middle;
+}
+.post-bottom {
+    vertical-align: bottom;
+}
+.post-heading {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+.post-list {
+    padding-left: 0;
+    list-style: none;
+}
+
+.post-header-body  a.user{
+    font-size: 20px;
+    color: #111111;
+}
+
+.post-header-body  span.date {
+    color: lightgrey;
+}
+
+.post-header-body ul{
+    display: table-cell;
+}
+
+.post-header-body ul li{
+    display: block;
+}
