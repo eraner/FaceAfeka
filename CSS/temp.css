@@ -1,17 +1,21 @@
 .post {
-    background: #4CAF50;
+    display: block;
     margin-top: 15px;
 }
 .post:first-child {
     margin-top: 0;
 }
 .post,
-.post-header-body {
+.post-header-body,
+.post-body{
     zoom: 1;
     overflow: hidden;
 }
 .post-header-body {
     width: 100%;
+}
+.post-body{
+    width: 10000px;
 }
 .post-object {
     height: 100px;
@@ -28,7 +32,8 @@
 }
 .post-left,
 .post-right,
-.post-header-body {
+.post-header-body,
+.post-body{
     display: table-cell;
     vertical-align: top;
 }
@@ -47,12 +52,12 @@
     list-style: none;
 }
 
-.post-header-body  a.user{
+a.user{
     font-size: 20px;
     color: #111111;
 }
 
-.post-header-body  span.date {
+span.date {
     color: lightgrey;
 }
 
@@ -62,4 +67,60 @@
 
 .post-header-body ul li{
     display: block;
+}
+
+.panel-heading{
+    background-color: blue;
+}
+
+.view-all-comments {
+    position: relative;
+    padding: 3px 5px;
+    background: #F5F5F5;
+    font-weight: 500;
+    font-size: 12px;
+    color: #c2c2c2;
+}
+.view-all-comments > p {
+    color: #424242;
+    padding: 0 5px;
+}
+
+a.author {
+    font-weight: 500;
+    font-size: 14px;
+    color: #26a69a;
+    padding-right: 5px;
+}
+
+.header-date {
+    color: white;
+}
+
+.date {
+    color: #888;
+}
+
+.commenter-img{
+    height: 50px;
+    width: 50px;
+    display: block;
+}
+.panel.panel-default ul.comments {
+    list-style: none;
+    padding: 0;
+    border-top: 1px solid #e2e9e6;
+    margin-bottom: 0;
+}
+
+.panel.panel-default ul.comments li {
+    border-bottom: 1px solid #F5F5F5;
+    background: #fff;
+    padding: 5px;
+}
+
+.like-btn{
+    color: #111111;
+    margin-right: 5px;
+    right: 5px;
 }
