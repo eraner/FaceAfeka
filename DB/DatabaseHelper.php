@@ -132,7 +132,7 @@ class DatabaseHelper {
         return $friends;
     }
 
-    /**
+    /** Inserting a new Post.
      * @return true/false.
      * @param $publisher - name of uploader.
      * @param $status - string of status.
@@ -202,7 +202,7 @@ class DatabaseHelper {
                 $comments[] = new Comment($com['PostID'], $com['Comment'], $com['Username'], $com['Date']);
             }
 
-            $posts[] = new PostDetails($row['Status'], $row['ImgSrc'], $row['Publisher'],
+            $posts[] = new PostDetails($row['PostID'], $row['Status'], $row['ImgSrc'], $row['Publisher'],
                 $row['Likes'], $row['Date'], $row['Privacy'], $comments);
         }
 
@@ -226,5 +226,24 @@ class DatabaseHelper {
             $users[] = $row['Username'];
         }
         return $users;
+    }
+
+    /**
+     * Inserting a new Comment.
+     * @param $postID
+     * @param $comment
+     * @param $username
+     * @return bool|mysqli_result
+     */
+    function InsertNewComment($postID, $comment, $username){
+
+        $comment = addslashes($comment);
+        $username = addslashes($username);
+
+        $insert_q = "INSERT INTO Comments (PostID, Comment, Username, Date) VALUES (";
+        $insert_q .= $postID.", '".$comment."', '".$username."', now() );";
+
+        $result = $this->db_query($insert_q);
+        return $result;
     }
 }

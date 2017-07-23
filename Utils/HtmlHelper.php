@@ -170,9 +170,10 @@ EOT;
                         <form class="form-group" role="form" method="post" action="UploadComment.php" >
                         <div class="input-group">
                             <input type="text" name="comment" class="form-control" />
-
+                            <input type="hidden" name="postID" value="$post->postID"/> 
                             <span class="input-group-btn">
-                                <button  type="submit" class="btn btn-default" ><span class="glyphicon glyphicon-comment"> </span></a>
+                                <button  type="submit" class="btn btn-default" >
+                                <span class="glyphicon glyphicon-comment"></span></a>
                             </span>
                         </div>
                         </form>

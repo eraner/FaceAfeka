@@ -2,6 +2,7 @@
 
 class PostDetails
 {
+    public $postID;
     public $status;
     public $imgSrc;
     public $publisher;
@@ -10,8 +11,9 @@ class PostDetails
     public $privacy;
     public $commentArray;
 
-    function __construct($status, $imgSrc, $publisher, $likes, $date, $privacy, $commentsArr)
+    function __construct($postID, $status, $imgSrc, $publisher, $likes, $date, $privacy, $commentsArr)
     {
+        $this->postID = $postID;
         $this->status = $status;
         $this->imgSrc = $imgSrc;
         $this->publisher = $publisher;
