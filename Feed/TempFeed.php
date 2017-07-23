@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link href="../CSS/temp.css" rel="stylesheet" type='text/css'/>
+    <link href="../CSS/postCss.css" rel="stylesheet" type='text/css'/>
     <link href="../CSS/css.css" rel="stylesheet" type='text/css'/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -19,16 +19,16 @@
             <div class="panel panel-default">
 
                 <div class="panel-heading" style="background-color: #4CAF50">
-                    <div class="post">
+                    <div class="postLayout">
 
-                        <div class="post-left">
+                        <div class="postLayout-left">
                             <a href="">
-                                <img src="../Resources/UploadedImgs/man.png" class="post-object">
+                                <img src="../Resources/UploadedImgs/man.png" class="postLayout-object">
                             </a>
                         </div>
-                        <div class="post-header-body">
-                            <div class="post-heading"><a class="user">Jonathan</a></div>
-                            <div class="post-bottom"><div class="header-date">on 15th January, 2014</div></div>
+                        <div class="postLayout-header-body">
+                            <div class="postLayout-heading"><a class="user">Jonathan</a></div>
+                            <div class="postLayout-bottom"><div class="header-date">on 15th January, 2014</div></div>
                         </div>
                     </div>
                 </div>
@@ -43,7 +43,7 @@
 
                     </div>
                 </div>
-                <div class="view-all-comments">
+                <div class="comments-header">
                     <button type="button" class="btn btn-primary"  style="position:relative; margin:5px">
                         <span class="glyphicon glyphicon-thumbs-up"></span> Likes
                         <span class="badge">7</span>
@@ -52,37 +52,37 @@
 
                 </div>
                 <ul class="comments">
-                    <li class="post">
-                        <div class="post-left">
+                    <li class="postLayout">
+                        <div class="postLayout-left">
                             <a href="">
                                 <img src="../Resources/UploadedImgs/woman.png" class="commenter-img">
                             </a>
                         </div>
-                        <div class="post-body">
+                        <div class="postLayout-body">
                             <a href="" class="author">Mary</a>
                             <span>Wow</span>
                             <div class="date">2 days</div>
                         </div>
                     </li>
-                    <li class="post">
-                        <div class="post-left">
+                    <li class="postLayout">
+                        <div class="postLayout-left">
                             <a href="">
                                 <img src="../Resources/UploadedImgs/man.png" class="commenter-img">
                             </a>
                         </div>
-                        <div class="post-body">
+                        <div class="postLayout-body">
                             <a href="" class="author">John</a>
                             <span>Yes I Know</span>
                             <div class="date">1 days</div>
                         </div>
                     </li>
-                    <li class="post">
-                        <div class="post-left">
+                    <li class="postLayout">
+                        <div class="postLayout-left">
                             <a href="">
                                 <img src="../Resources/UploadedImgs/201707181724441840804854.png" class="commenter-img">
                             </a>
                         </div>
-                        <div class="post-body">
+                        <div class="postLayout-body">
                             <a href="" class="author">Cat</a>
                             <span>:-)</span>
                             <div class="date">now</div>

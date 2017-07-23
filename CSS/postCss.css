@@ -1,53 +1,53 @@
-.post {
+.postLayout {
     display: block;
     margin-top: 15px;
 }
-.post:first-child {
+.postLayout:first-child {
     margin-top: 0;
 }
-.post,
-.post-header-body,
-.post-body{
+.postLayout,
+.postLayout-header-body,
+.postLayout-body{
     zoom: 1;
     overflow: hidden;
 }
-.post-header-body {
+.postLayout-header-body {
     width: 100%;
 }
-.post-body{
+.postLayout-body{
     width: 10000px;
 }
-.post-object {
+.postLayout-object {
     height: 100px;
     width: 100px;
     display: block;
 }
-.post-right,
-.post > .pull-right {
+.postLayout-right,
+.postLayout > .pull-right {
     padding-left: 10px;
 }
-.post-left,
-.post > .pull-left {
+.postLayout-left,
+.postLayout > .pull-left {
     padding-right: 10px;
 }
-.post-left,
-.post-right,
-.post-header-body,
-.post-body{
+.postLayout-left,
+.postLayout-right,
+.postLayout-header-body,
+.postLayout-body{
     display: table-cell;
     vertical-align: top;
 }
-.post-middle {
+.postLayout-middle {
     vertical-align: middle;
 }
-.post-bottom {
+.postLayout-bottom {
     vertical-align: bottom;
 }
-.post-heading {
+.postLayout-heading {
     margin-top: 0;
     margin-bottom: 5px;
 }
-.post-list {
+.postLayout-list {
     padding-left: 0;
     list-style: none;
 }
@@ -61,19 +61,15 @@ span.date {
     color: lightgrey;
 }
 
-.post-header-body ul{
+.postLayout-header-body ul{
     display: table-cell;
 }
 
-.post-header-body ul li{
+.postLayout-header-body ul li{
     display: block;
 }
 
-.panel-heading{
-    background-color: blue;
-}
-
-.view-all-comments {
+.comments-header {
     position: relative;
     padding: 3px 5px;
     background: #F5F5F5;
@@ -81,7 +77,7 @@ span.date {
     font-size: 12px;
     color: #c2c2c2;
 }
-.view-all-comments > p {
+.comments-header > p {
     color: #424242;
     padding: 0 5px;
 }

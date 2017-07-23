@@ -1,5 +1,5 @@
 <?php
-require_once ("StatusDetails.php");
+require_once("PostDetails.php");
 require_once ("..\utils\HtmlHelper.php");
 require_once ("..\Utils\ImgUploader.php");
 
@@ -15,8 +15,8 @@ $db = new DatabaseHelper();
 $tempArr = array($loggedUser);
 $friends = $db->GetUsersFriends($loggedUser);
 $friends = array_merge($tempArr, $friends);
-$statusDetailsArr = $db->GetFriendsPosts($friends);
-if ($statusDetailsArr == -1){
+$postDetailsArr = $db->GetFriendsPosts($friends);
+if ($postDetailsArr == -1){
     header("HTTP/1.0 404 Not Found");
     die();
 }
@@ -28,28 +28,17 @@ PrintScript();
 
 AddTopNavigationBar($loggedUser);
 
-echo "<div class='main' id='feed' style='padding-top: 30px'>";
-PrintStatusesListHTML($statusDetailsArr);
+echo "<div class='main' id='feed'>";
+PrintStatusesListHTML($postDetailsArr);
 echo "</div>";
 
 echo "</body>";
 echo "</html>";
 
-function PrintStatusesListHTML($statusDetailsArr){
+function PrintStatusesListHTML($postDetailsArr){
 
-    foreach ($statusDetailsArr as $statusDetails) {
-        echo "<div>";
-        /**Add user Name*/
-        echo "$statusDetails->date";
-        echo "<h2>" . $statusDetails->publisher . "</h2>";
-        /**Add image if imgSrc isn't Blank*/
-        if ($statusDetails->imgSrc != "") {
-            echo "<p><img src=\"" . UPLOADED_THUMBS_LOCATION . $statusDetails->imgSrc . "\"> <a href=\"#\">Picture here</a></p>";
-        }
-        /**Add status*/
-        echo $statusDetails->status;
-        echo "</div>";
-        echo "<hr>";
+    foreach ($postDetailsArr as $postDetails) {
+        printSinglePost($postDetails);
     }
 }
 

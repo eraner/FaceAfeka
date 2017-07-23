@@ -272,6 +272,7 @@ body{
     padding: 0;
     overflow: hidden;
     background-color: #333;
+    z-index: 10;
 }
 
 .navbar > ul > li{
@@ -365,7 +366,10 @@ img.friendImg{
     background-color: #4CAF50;
 }
 
-.main{
+#feed{
     padding: 16px;
-    margin-top: 30px;
+    margin: 0 auto;
+    align-items: center;
+    align-content: center;
+    align-self: center;
 }
