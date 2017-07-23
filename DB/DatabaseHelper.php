@@ -112,6 +112,8 @@ class DatabaseHelper {
         }
     }
 
+
+
     function GetUsersFriends($user){
         $friends = array();
         $select_query = "SELECT user2 FROM Friends WHERE (User1 = '".$user."' );";
@@ -151,6 +153,21 @@ class DatabaseHelper {
         return $result;
     }
 
+    /**@return string which is a list for the query.
+     * @param $users
+     */
+    function MakeUserList($users){
+        $numOfUsers = count($users);
+        $userList = "( ";
+        for($i=1 ; $i < $numOfUsers ; $i++)
+            if( $i != $numOfUsers-1 )
+                $userList .= "'".$users[$i]."', ";
+            else
+                $userList .= "'".$users[$i]."' )";
+
+        return $userList;
+    }
+
     /**Gets Array of friends and returns array of posts of friends.
      * first friend is the user all the others are his friends
      * @return PostDetails[] - on success - Array of StatusDetails from requested publisher (can be empty list),
@@ -164,14 +181,9 @@ class DatabaseHelper {
         $posts = array();
 
         $user = $friends[0];
-        $numOfFriends = count($friends);
-        $friendsList = "( ";
-        for($i=1 ; $i < $numOfFriends ; $i++)
-            if( $i != $numOfFriends-1 )
-                $friendsList .= "'".$friends[$i]."', ";
-            else
-                $friendsList .= "'".$friends[$i]."' )";
 
+        $friendsList = $this->MakeUserList($friends);
+        echo $friendsList;
         $select_query = "SELECT * FROM Posts WHERE ((Publisher) IN ".$friendsList." AND Privacy='Public') ";
         $select_query .= " OR (Publisher='".$user."') ORDER BY Date DESC;";
 
@@ -195,5 +207,24 @@ class DatabaseHelper {
         }
 
         return $posts;
+    }
+
+    /**
+     * @param $excludedUsers list of users to exclude from the list
+     * @return array of users without the excluded users.
+     */
+    function GetFilteredUsers($excludedUsers){
+        $users = array();
+        $excludedUsers = $this->MakeUserList($excludedUsers);
+
+        $select_query = "SELECT Username FROM Friends WHERE Username NOT IN $excludedUsers ";
+        $result = $this->db_query($select_query);
+        if(!$result){
+            return $users;
+        }
+        while ($row = $result->fetch_assoc()){
+            $users[] = $row['Username'];
+        }
+        return $users;
     }
 }
