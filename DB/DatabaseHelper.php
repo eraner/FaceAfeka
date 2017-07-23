@@ -182,8 +182,16 @@ class DatabaseHelper {
         }
 
         while ($row = $result->fetch_assoc()){
+            $postId = $row['PostID'];
+            $comment_query = "SELECT * FROM Comments WHERE (PostID = ".$postId.") ORDER BY Date ASC;;";
+            $comments_result = $this->db_query($comment_query);
+            $comments = array();
+            while ($com = $comments_result->fetch_assoc()){
+                $comments[] = new Comment($com['PostID'], $com['Comment'], $com['Username'], $com['Date']);
+            }
+
             $posts[] = new PostDetails($row['Status'], $row['ImgSrc'], $row['Publisher'],
-                $row['Likes'], $row['Date'], $row['Privacy']);
+                $row['Likes'], $row['Date'], $row['Privacy'], $comments);
         }
 
         return $posts;

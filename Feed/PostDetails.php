@@ -8,8 +8,9 @@ class PostDetails
     public $likes;
     public $date;
     public $privacy;
+    public $commentArray;
 
-    function __construct($status, $imgSrc, $publisher, $likes, $date, $privacy)
+    function __construct($status, $imgSrc, $publisher, $likes, $date, $privacy, $commentsArr)
     {
         $this->status = $status;
         $this->imgSrc = $imgSrc;
@@ -17,5 +18,6 @@ class PostDetails
         $this->likes = $likes;
         $this->date = $date;
         $this->privacy = $privacy;
+        $this->commentArray = $commentsArr;
     }
 }

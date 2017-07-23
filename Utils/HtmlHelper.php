@@ -1,6 +1,7 @@
 <?php
 require_once('..\DB\DatabaseHelper.php');
 require_once('ImgUploader.php');
+require_once ('..\Feed\Comment.php');
 
 
 function PrintHeadHTML(){
@@ -100,6 +101,32 @@ function printSinglePost(PostDetails $post){
         }
     }
 
+    $comments_count = count($post->commentArray);
+    if ($comments_count > 0){
+        $comment_header = "<a class='userComment'><span class=\"glyphicon glyphicon-comment\"> </span>  ".$comments_count." comments </a>";
+    }else{
+        $comment_header = "<p><span class=\"glyphicon glyphicon-comment\"> </span> Be the first to comment</p>";
+    }
+    $comments_print = "";
+    foreach ($post->commentArray as  $comment){
+        //$comment = cast('Comment', $comment);
+        $temp = <<<EOT
+        <li class="postLayout">
+                        <div class="postLayout-left">
+                            <a href="">
+                                <img src="../Resources/UploadedImgs/woman.png" class="commenter-img">
+                            </a>
+                        </div>
+                        <div class="postLayout-body">
+                            <a href="" class="author">$comment->username</a>
+                            <span>$comment->comment</span>
+                            <div class="date">$comment->date</div>
+                        </div>
+                    </li>
+EOT;
+        $comments_print .= $temp;
+    }
+
     $postStr = <<<EOT
 <div class="timeline row" data-toggle="isotope">
 
@@ -134,55 +161,21 @@ function printSinglePost(PostDetails $post){
                         <span class="glyphicon glyphicon-thumbs-up"></span> Likes
                         <span class="badge">$post->likes</span>
                     </button>
-                    <p><span class="glyphicon glyphicon-comment"> </span> Be the first to comment</p>
+                    $comment_header
 
                 </div>
                 <ul class="comments">
-                    <li class="postLayout">
-                        <div class="postLayout-left">
-                            <a href="">
-                                <img src="../Resources/UploadedImgs/woman.png" class="commenter-img">
-                            </a>
-                        </div>
-                        <div class="postLayout-body">
-                            <a href="" class="author">Mary</a>
-                            <span>Wow</span>
-                            <div class="date">2 days</div>
-                        </div>
-                    </li>
-                    <li class="postLayout">
-                        <div class="postLayout-left">
-                            <a href="">
-                                <img src="../Resources/UploadedImgs/man.png" class="commenter-img">
-                            </a>
-                        </div>
-                        <div class="postLayout-body">
-                            <a href="" class="author">John</a>
-                            <span>Yes I Know</span>
-                            <div class="date">1 days</div>
-                        </div>
-                    </li>
-                    <li class="postLayout">
-                        <div class="postLayout-left">
-                            <a href="">
-                                <img src="../Resources/UploadedImgs/201707181724441840804854.png" class="commenter-img">
-                            </a>
-                        </div>
-                        <div class="postLayout-body">
-                            <a href="" class="author">Cat</a>
-                            <span>:-)</span>
-                            <div class="date">now</div>
-                        </div>
-                    </li>
+                    $comments_print
                     <li class="comment-form">
+                        <form class="form-group" role="form" method="post" action="UploadComment.php" >
                         <div class="input-group">
-
-                            <input type="text" class="form-control" />
+                            <input type="text" name="comment" class="form-control" />
 
                             <span class="input-group-btn">
-                                <a href="" class="btn btn-default"><span class="glyphicon glyphicon-comment"> </span></a>
+                                <button  type="submit" class="btn btn-default" ><span class="glyphicon glyphicon-comment"> </span></a>
                             </span>
                         </div>
+                        </form>
                     </li>
                 </ul>
             </div>

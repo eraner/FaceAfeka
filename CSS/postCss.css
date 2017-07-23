@@ -82,6 +82,16 @@ span.date {
     padding: 0 5px;
 }
 
+.comments-header >  a {
+    color: #3C67B5;
+}
+
+.comments-header >  a:hover {
+    cursor: default;
+    color: #28344B;
+    text-decoration: none;
+}
+
 a.author {
     font-weight: 500;
     font-size: 14px;

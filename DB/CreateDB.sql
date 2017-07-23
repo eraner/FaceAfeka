@@ -59,3 +59,10 @@ CREATE TABLE Comments(
   FOREIGN KEY (PostID) REFERENCES Posts(PostID)
 );
 
+INSERT INTO Comments (PostID, Comment, Username, Date) VALUES
+  (1 , 'Great job, mate!', 'OhadCohen', '2017-07-15 16:05:00');
+INSERT INTO Comments (PostID, Comment, Username, Date) VALUES
+  (1 , ':-)', 'NirLevi', '2017-07-15 20:50:00');
+INSERT INTO Comments (PostID, Comment, Username, Date) VALUES
+  (1 , 'lolol', 'EranLaudin', '2017-07-15 17:50:00');
+
