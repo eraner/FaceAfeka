@@ -24,7 +24,7 @@ if ($postDetailsArr == -1){
 PrintHeadHTML();
 echo "<body>";
 
-PrintScript();
+//PrintScript();
 
 AddTopNavigationBar($loggedUser);
 
@@ -36,32 +36,51 @@ echo "</body>";
 echo "</html>";
 
 function PrintStatusesListHTML($postDetailsArr){
-
+    $imgNames = array();
+    $counter = 0;
     foreach ($postDetailsArr as $postDetails) {
         printSinglePost($postDetails);
+            $actualSrc = UPLOADED_IMAGES_LOCATION.$postDetails->imgSrc."";
+            echo "<div class='myImage'>";
+            echo "<img onclick='EnlargeImg(\"$actualSrc\")' id='myImg$counter' src=\"".UPLOADED_THUMBS_LOCATION.$postDetails->imgSrc."\">";
+            $imgNames = 'myImage'.$counter;
+            $counter++;
+            echo "</div>";
+        echo "</div>";
+        echo "<hr>";
     }
+    PrintThumbModalScript();
 }
 
-function PrintScript(){
-    echo "<script>
-                var cacheData;
-                var data = $('#main').html();
-                $('#submitPost').click(function() {
-                    alert('works');
-                  $.ajax({
-                    url: 'getPosts.php',
-                    method: 'POST',
-                    data: data,
-                    dataType: 'html',
-                    success: function(data) {
-                      if(data !== cacheData){
-                          cacheData = data;
-                          var result = $('<div />').append(data).find('#main').html();
-                          $('#main').html(result);
-                      }
-                    }
-                  });
-                }); 
-            </script>";
+function PrintThumbModalScript(){
+    echo "<div id=\"myModal\" class=\"modal\">
+                      <span class=\"close\">X</span>
+                      <img class=\"modal-content\" id=\"img01\">
+                      <div id=\"caption\"></div>
+                    </div>
+                    <script src=\"../JS/ThumbModal.js\"></script>";
 }
+
+//function PrintScript(){
+//    echo "<script>
+//                var cacheData;
+//                var data = $('#main').html();
+//                $('#submitPost').click(function() {
+//                    alert('works');
+//                  $.ajax({
+//                    url: 'getPosts.php',
+//                    method: 'POST',
+//                    data: data,
+//                    dataType: 'html',
+//                    success: function(data) {
+//                      if(data !== cacheData){
+//                          cacheData = data;
+//                          var result = $('<div />').append(data).find('#main').html();
+//                          $('#main').html(result);
+//                      }
+//                    }
+//                  });
+//                });
+//            </script>";
+//}
 
