@@ -1,6 +1,6 @@
 <?php
 
-class StatusDetails
+class PostDetails
 {
     public $status;
     public $imgSrc;

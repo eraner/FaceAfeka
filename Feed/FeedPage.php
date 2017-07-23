@@ -36,18 +36,9 @@ echo "</body>";
 echo "</html>";
 
 function PrintStatusesListHTML($postDetailsArr){
-    $imgNames = array();
-    $counter = 0;
+
     foreach ($postDetailsArr as $postDetails) {
         printSinglePost($postDetails);
-            $actualSrc = UPLOADED_IMAGES_LOCATION.$postDetails->imgSrc."";
-            echo "<div class='myImage'>";
-            echo "<img onclick='EnlargeImg(\"$actualSrc\")' id='myImg$counter' src=\"".UPLOADED_THUMBS_LOCATION.$postDetails->imgSrc."\">";
-            $imgNames = 'myImage'.$counter;
-            $counter++;
-            echo "</div>";
-        echo "</div>";
-        echo "<hr>";
     }
     PrintThumbModalScript();
 }

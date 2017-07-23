@@ -323,6 +323,7 @@ body{
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
+    margin-top: 50px;
 }
 
 .sidenav a {

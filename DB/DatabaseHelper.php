@@ -153,7 +153,7 @@ class DatabaseHelper {
 
     /**Gets Array of friends and returns array of posts of friends.
      * first friend is the user all the others are his friends
-     * @return StatusDetails[] - on success - Array of StatusDetails from requested publisher (can be empty list),
+     * @return PostDetails[] - on success - Array of StatusDetails from requested publisher (can be empty list),
      *          fail return -1;
      * @param $publisher - username of publisher.
      */
@@ -182,7 +182,7 @@ class DatabaseHelper {
         }
 
         while ($row = $result->fetch_assoc()){
-            $posts[] = new StatusDetails($row['Status'], $row['ImgSrc'], $row['Publisher'],
+            $posts[] = new PostDetails($row['Status'], $row['ImgSrc'], $row['Publisher'],
                 $row['Likes'], $row['Date'], $row['Privacy']);
         }
 
