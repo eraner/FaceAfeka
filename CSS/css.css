@@ -137,7 +137,8 @@ body{
 }
 
 /**Post styles*/
-.post-style {
+.modal-style {
+    margin-top: 0px;
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
     border-radius: 20px;
@@ -156,22 +157,32 @@ body{
     horiz-align: center;
     color: white;
 }
-.post-style h1{
+.modal-style h1{
     color: #fff;
     font-family: 'Comic Sans MS', sans-serif;
     font-size: 35px;
     font-weight:600;
     text-align: center;
-    margin:13% auto 4% auto ;
-    padding-top: 10px;
+    margin:8% auto 4% auto ;
+    padding-top: 5px;
     horiz-align: center;
 }
-.post-style textarea{
+
+.modal-style h3{
+    color: #000;
+    font-family: 'Comic Sans MS', sans-serif;
+    font-size: 25px;
+    font-weight:600;
+    text-align: center;
+    horiz-align: center;
+}
+
+.modal-style textarea{
     background:#28344B;
     resize: none;
     color: white;
 }
-.post-style form input[type="file"]{
+.modal-style form input[type="file"]{
     width:69%;
     font-size: 0.9em;
     outline: none;
@@ -196,7 +207,7 @@ body{
     -webkit-box-shadow: inset 2px 2px 10px rgba(26, 21, 21, 0.54);
     font-family: 'Comic Sans MS', sans-serif;
 }
-.post-style form input[type="submit"]{
+.modal-style form input[type="submit"]{
     width:84%;
     font-size: 19px;
     display: inline-block;
@@ -229,16 +240,24 @@ body{
     background: linear-gradient(to bottom,  rgb(204,223,255) 0%,rgb(158,192,249) 54%,rgb(154,188,247) 77%,rgb(158,191,247) 90%,rgb(165,196,247) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ccdfff', endColorstr='#a5c4f7',GradientType=0 );
 }
-.post-style input[type="submit"]:hover {
+.modal-style input[type="submit"]:hover {
     box-shadow: 0 0 8px 2px #ffffff;
 }
-.post-style form input[type="radio"]{
+.modal-style form input[type="radio"]{
     color: white;
     text-align: center;
     font-size: 23px;
 }
-.post-style form table {
+.modal-style form table {
     padding: 20px;
+}
+
+.modal-style .profileImg{
+    align-self: center;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    border: 3px solid #000;
 }
 
 
@@ -453,4 +472,10 @@ img:hover {opacity: 0.7;}
     .modal-content {
         width: 100%;
     }
+}
+
+ul#myMenu.dropdown-menu{
+    display: block;
+    z-index: auto;
+    opacity: 1;
 }
