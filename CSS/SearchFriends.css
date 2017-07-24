@@ -1,0 +1,3 @@
+#friends-list{float:left;list-style:none;margin-left: 0px;padding:0;width:200px;position: fixed; }
+#friends-list li{padding: 10px; background: #f0f0f0; border-bottom: #bbb9b9 1px solid; }
+#friends-list li:hover{background:#ece3d2;cursor: pointer; }

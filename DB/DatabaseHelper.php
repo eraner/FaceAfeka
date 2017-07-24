@@ -112,8 +112,6 @@ class DatabaseHelper {
         }
     }
 
-
-
     function GetUsersFriends($user){
         $friends = array();
         $select_query = "SELECT user2 FROM Friends WHERE (User1 = '".$user."' );";
@@ -183,7 +181,7 @@ class DatabaseHelper {
         $user = $friends[0];
 
         $friendsList = $this->MakeUserList($friends);
-        echo $friendsList;
+
         $select_query = "SELECT * FROM Posts WHERE ((Publisher) IN ".$friendsList." AND Privacy='Public') ";
         $select_query .= " OR (Publisher='".$user."') ORDER BY Date DESC;";
 
@@ -210,21 +208,24 @@ class DatabaseHelper {
     }
 
     /**
-     * @param $excludedUsers list of users to exclude from the list
-     * @return array of users without the excluded users.
+     * @param $hint  to get sub string.
+     * @return array of users matches the hint.
      */
-    function GetFilteredUsers($excludedUsers){
+    function GetFilteredUsers($hint){
         $users = array();
-        $excludedUsers = $this->MakeUserList($excludedUsers);
-
-        $select_query = "SELECT Username FROM Friends WHERE Username NOT IN $excludedUsers ";
+        if($hint=='*'){
+            $select_query ="SELECT * FROM Users";
+        }else
+        $select_query ="SELECT * FROM Users WHERE Username like '" . $hint . "%' ORDER BY Username";
         $result = $this->db_query($select_query);
+
         if(!$result){
             return $users;
         }
         while ($row = $result->fetch_assoc()){
             $users[] = $row['Username'];
         }
+
         return $users;
     }
 
@@ -242,6 +243,21 @@ class DatabaseHelper {
 
         $insert_q = "INSERT INTO Comments (PostID, Comment, Username, Date) VALUES (";
         $insert_q .= $postID.", '".$comment."', '".$username."', now() );";
+
+        $result = $this->db_query($insert_q);
+        return $result;
+    }
+
+    /**
+     * make friends.
+     * @param $friend1
+     * @param $friend2
+     * @return bool|mysqli_result
+     */
+    function MakeFriends($friend1, $friend2){
+        $friend1 = addslashes($friend1);
+        $friend2 = addslashes($friend2);
+        $insert_q = "INSERT INTO friends VALUES ('".$friend1."', '".$friend2."')";
 
         $result = $this->db_query($insert_q);
         return $result;

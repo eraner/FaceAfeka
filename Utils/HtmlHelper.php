@@ -15,6 +15,7 @@ function PrintHeadHTML(){
             <title>Document</title>
             <link href=\"../CSS/css.css\" rel=\"stylesheet\" type='text/css'/>
             <link href=\"../CSS/postCss.css\" rel=\"stylesheet\" type='text/css'/>
+            <link href=\"../CSS/SearchFriends.css\" rel=\"stylesheet\" type='text/css'/>
             <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">
             <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js\"></script>
             <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js\"></script>
@@ -32,6 +33,25 @@ function AddTopNavigationBar($loggedUser){
                 <li><button type='button' data-toggle='modal' data-target='#myPost'>
                     <span class=\"glyphicon glyphicon-plus-sign\"></span> Post</button>
                 </li>
+                <li>
+                <form style='margin-top: 8px;' class='form-inline' method='post' action='AddFriend.php'>
+                    <div class='input-group'>
+                        <input class='form-control' type=\"text\" id=\"search-box\" name='search-box' placeholder=\"Look for Friends\" />
+                        
+                        <div class='input-group-btn'>
+                            <button type=\"submit\" class=\"btn btn-default\"/>
+                            <span class=\"glyphicon glyphicon-link\">Add</span>
+                        </div>
+                    </div>
+                </form>
+                <div id=\"suggesstion-box\"></div>
+                        <script src='../JS/SearchFriends.js'></script>";
+    if (isset($_SESSION['error'])){
+        echo "<li><span id=\"errorLabel\" style=\"color:red; font-size: 25px; font-family: 'Comic Sans MS', sans-serif;\">".$_SESSION['error']."</span></li>";
+    }
+    unset($_SESSION['error']);
+
+    echo       "</li>
                 <li><a href='#' class='logout' onclick='document.location.href=\"../Login/Logout.php\"'>
                     <span class=\"glyphicon glyphicon-log-out\"></span>  Logout</a> 
                 </li>
@@ -172,8 +192,8 @@ EOT;
                             <input type="text" name="comment" class="form-control" />
                             <input type="hidden" name="postID" value="$post->postID"/> 
                             <span class="input-group-btn">
-                                <button  type="submit" class="btn btn-default" >
-                                <span class="glyphicon glyphicon-comment"></span></a>
+                                <button  type="submit" class="btn btn-default">
+                                <span class="glyphicon glyphicon-comment"></span>
                             </span>
                         </div>
                         </form>
