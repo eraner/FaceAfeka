@@ -24,11 +24,17 @@ function PrintHeadHTML(){
 }
 
 function AddTopNavigationBar($loggedUser){
+    $userProfileImgSrc = GetUserProfileImgOrDefault($loggedUser);
+
     /** Navigation Bar Init*/
     echo "<div class='navbar'>
            <ul>
                 <li><a class=\"active\" href='#'>FaceAfeka</a> </li>
-                <li><a href='#'> <span class=\"glyphicon glyphicon-user\"></span> Profile</a> </li>
+                <li>
+                    <button type='button' data-toggle='modal' data-target='#profileModal'> 
+                        <span class=\"glyphicon glyphicon-user\"></span> Profile
+                    </button> 
+                </li>
                 <li><a href='#' onclick='openNav()'> <span class=\"glyphicon glyphicon-link\"></span> Friends</a> </li>
                 <li><button type='button' data-toggle='modal' data-target='#myPost'>
                     <span class=\"glyphicon glyphicon-plus-sign\"></span> Post</button>
@@ -73,7 +79,7 @@ function AddTopNavigationBar($loggedUser){
     echo "<div class='modal fade' id='myPost' role='dialog'>
             <div class='modal-dialog'>";
     /**Set Post window content*/
-    echo "<div class=\"post-style\">
+    echo "<div class=\"modal-style\">
     <form action=\"UploadPost.php\" method='post' multipart=\"multiple\" enctype=\"multipart/form-data\">
         <input type='hidden' name='loggedUser' value='".$loggedUser."'/>
         <center><table>
@@ -102,16 +108,36 @@ function AddTopNavigationBar($loggedUser){
     </div>";
     echo "</div>"; /**modal fade /div*/
     echo "</div>"; /**post-style /div*/
+
+    /** Setup Profile window popup */
+    echo "<div class='modal fade' id='profileModal' role='dialog'>
+            <div class='modal-dialog'>";
+    echo "<div class=\"modal-style\">
+    <form action=\"UpdateProfilePicture.php\" method='post' multipart=\"multiple\" enctype=\"multipart/form-data\">
+        <input type='hidden' name='loggedUser' value='".$loggedUser."'/>
+        <center><table>
+            <tr><td><h1>".$loggedUser." Profile</h1></td></tr>
+            <tr>
+                <td>
+                <img class='profileImg' name=\"currentImg\" src='".$userProfileImgSrc."' />
+                </td>
+            </tr>
+            <tr>
+                <td><input type=\"file\" name=\"pic\" placeholder='Change picture?' accept=\"image/*\"></td>
+            </tr></br>
+            <tr></br>
+                <td><input type=\"submit\" value=\"Update Picture\"></td>
+            </tr>
+        </table>
+        </center>
+    </form>
+    </div>";
+    echo "</div>";
+    echo "</div>";
+
 }
 
 function printSinglePost(PostDetails $post){
-    #echo date_format($date, 'g:ia \o\n l jS F Y');
-    #output: 5:45pm on Saturday 24th March 2012
-
-    #$tempDate = strtotime($post->date);
-    #$tempDate = date('d/M/Y H:i:s', $tempDate);
-    #$formattedDate = date_format($tempDate, 'jS F Y \@ g:ia');
-
     $imgs = explode(',', $post->imgSrc);
     $imgs_print = "";
     foreach ($imgs as $img_src){
@@ -189,12 +215,14 @@ EOT;
                     <li class="comment-form">
                         <form class="form-group" role="form" method="post" action="UploadComment.php" >
                         <div class="input-group">
+                            <input type="hidden" name="postID" value="$post->postID"/>
                             <input type="text" name="comment" class="form-control" />
-                            <input type="hidden" name="postID" value="$post->postID"/> 
+                             
                             <span class="input-group-btn">
                                 <button  type="submit" class="btn btn-default">
                                 <span class="glyphicon glyphicon-comment"></span>
                             </span>
+                            
                         </div>
                         </form>
                     </li>

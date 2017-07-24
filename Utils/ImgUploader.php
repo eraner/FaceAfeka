@@ -1,8 +1,15 @@
 <?php
 
+const UPLOADED_BUILTIN_LOCATION = "../Resources/Images/";
 const UPLOADED_IMAGES_LOCATION = "../Resources/UploadedImgs/";
 const UPLOADED_THUMBS_LOCATION = "../Resources/Thumbs/";
+const UPLOADED_PROFILE_LOCATION = "../Resources/Profiles/";
 
+/**
+ * Orginaizing the files from the $_FILES.
+ * @param $file
+ * @return array
+ */
 function reArrayFiles($file)
 {
     $file_ary = array();
@@ -19,13 +26,16 @@ function reArrayFiles($file)
     return $file_ary;
 }
 
+/**
+ * Uploading Images array and creating Thumb for them.
+ * @param $imgs
+ * @return array
+ */
 function UploadImgs($imgs){
     $images_arr = array();
 
-    if(!empty($imgs))
-    {
+    if(!empty($imgs)) {
         $img_desc = reArrayFiles($imgs);
-        //return $img_desc;
         foreach($img_desc as $val)
         {
             $temp = explode(".", $val['name']);
@@ -42,6 +52,12 @@ function UploadImgs($imgs){
     return $images_arr;
 }
 
+/**
+ * Creating thumb for an inputted Image.
+ * @param $src
+ * @param $dest
+ * @param $desired_width
+ */
 function CreateThumb($src, $dest, $desired_width) {
 
     $info = getimagesize($src);
@@ -84,4 +100,32 @@ function CreateThumb($src, $dest, $desired_width) {
             break;
     }
 
+}
+
+/**
+ * Updating the given username profile picture, replacing it if already exists.
+ * @param $username
+ * @param $img
+ * @return bool
+ */
+function UpdateProfilePicture($username, $img){
+    $img_name = basename($img["name"]);
+    $imgFileType = pathinfo($img_name,PATHINFO_EXTENSION);
+    $newName = $username.".jpg";
+    $target = UPLOADED_PROFILE_LOCATION.$newName;
+
+    if (move_uploaded_file($img['tmp_name'], $target)){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+function GetUserProfileImgOrDefault($username){
+    $fullImgPath = UPLOADED_PROFILE_LOCATION.$username.".jpg";
+    if (file_exists($fullImgPath)){
+        return $fullImgPath;
+    }else{
+        return UPLOADED_BUILTIN_LOCATION."profile-icon.png";
+    }
 }

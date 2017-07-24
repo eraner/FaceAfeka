@@ -197,11 +197,14 @@ class DatabaseHelper {
             $comments_result = $this->db_query($comment_query);
             $comments = array();
             while ($com = $comments_result->fetch_assoc()){
-                $comments[] = new Comment($com['PostID'], $com['Comment'], $com['Username'], $com['Date']);
+                $c_date = $this->GetFormattedDate($com['Date']);
+                $comments[] = new Comment($com['PostID'], $com['Comment'], $com['Username'], $c_date);
             }
 
+
+            $f_date = $this->GetFormattedDate($row['Date']);
             $posts[] = new PostDetails($row['PostID'], $row['Status'], $row['ImgSrc'], $row['Publisher'],
-                $row['Likes'], $row['Date'], $row['Privacy'], $comments);
+                $row['Likes'], $f_date, $row['Privacy'], $comments);
         }
 
         return $posts;
@@ -261,5 +264,10 @@ class DatabaseHelper {
 
         $result = $this->db_query($insert_q);
         return $result;
+    }
+    
+    function GetFormattedDate($date){
+        $temp = DateTime::createFromFormat('Y-m-d H:i:s', $date);
+        return date_format($temp, 'F jS Y \a\t g:ia');
     }
 }
