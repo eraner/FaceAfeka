@@ -101,7 +101,7 @@ class DatabaseHelper {
         if($username == ''){
             return false;
         }
-        $query = "SELECT username FROM Users WHERE Username = '".$username."'";
+        $query = "SELECT username FROM Users WHERE BINARY Username  = '".$username."'";
         $result = $this->db_query($query);
         if(mysqli_num_rows($result) >= 1) {
             /**Not Available*/
@@ -269,5 +269,33 @@ class DatabaseHelper {
     function GetFormattedDate($date){
         $temp = DateTime::createFromFormat('Y-m-d H:i:s', $date);
         return date_format($temp, 'F jS Y \a\t g:ia');
+    }
+
+    /**
+     * @param $postID
+     * @return int num of likes.
+     *          if -1 - Error.
+     */
+    function GetLikes($postID){
+        $query = "SELECT Likes FROM Posts WHERE PostID = $postID";
+        $result = $this->db_query($query);
+
+        if(!$result){
+            return -1;
+        }
+        $row = $result->fetch_assoc();
+        return $row['Likes'];
+    }
+
+    /**
+     * @param $postID
+     * @param $likes
+     * @return bool|mysqli_result
+     */
+    function SetLikes($postID, $likes){
+        $query = "UPDATE Posts SET Likes = $likes WHERE PostID = $postID";
+        $result = $this->db_query($query);
+
+        return $result;
     }
 }

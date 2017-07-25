@@ -47,7 +47,6 @@ function PrintThumbModalScript(){
     echo "<div id=\"myModal\" class=\"modal\">
                       <span class=\"close\">X</span>
                       <img class=\"modal-content\" id=\"img01\">
-                      <div id=\"caption\"></div>
                     </div>
                     <script src=\"../JS/ThumbModal.js\"></script>";
 }

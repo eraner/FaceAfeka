@@ -20,6 +20,7 @@ function PrintHeadHTML(){
             <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js\"></script>
             <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js\"></script>
             <script src=\"../JS/FriendsBar.js\"></script>
+            <script src=\"../JS/SetLike.js\"></script>
         </head>";
 }
 
@@ -53,7 +54,7 @@ function AddTopNavigationBar($loggedUser){
                 <div id=\"suggesstion-box\"></div>
                         <script src='../JS/SearchFriends.js'></script>";
     if (isset($_SESSION['error'])){
-        echo "<li><span id=\"errorLabel\" style=\"color:red; font-size: 25px; font-family: 'Comic Sans MS', sans-serif;\">".$_SESSION['error']."</span></li>";
+        echo "<script>alert('".$_SESSION['error']."')</script>";
     }
     unset($_SESSION['error']);
 
@@ -172,7 +173,7 @@ function printSinglePost(PostDetails $post){
 EOT;
         $comments_print .= $temp;
     }
-
+    $like = "Like";
     $postStr = <<<EOT
 <div class="timeline row" data-toggle="isotope">
 
@@ -203,10 +204,13 @@ EOT;
                     </div>
                 </div>
                 <div class="comments-header">
-                    <button type="button" class="btn btn-primary"  style="position:relative; margin:5px">
-                        <span class="glyphicon glyphicon-thumbs-up"></span> Likes
-                        <span class="badge">$post->likes</span>
+                    <form method="post" action="SetLike.php">
+                    <button id='LikeBtn' type="submit" class="btn btn-primary" style="position:relative; margin:5px">
+                        <span class="glyphicon glyphicon-thumbs-up"></span> <span id="like$post->postID">Like</span>
+                        <span class="badge" id="numOfLikes$post->postID">$post->likes</span>
+                        <input type="hidden" name="postID" value="$post->postID">
                     </button>
+                    </form>
                     $comment_header
 
                 </div>

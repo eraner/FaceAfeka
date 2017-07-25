@@ -27,7 +27,9 @@ if($db->IsUsernameAvailable($userToAdd)){   //username not exists.
     sendError("User doesn't exist!");
     return;
 }
+
 function sendError($errorMsg){
+    $errorMsg = addslashes($errorMsg);
     $_SESSION['error'] = $errorMsg;
     header("Location: FeedPage.php");
 }
