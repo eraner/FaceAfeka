@@ -14,6 +14,12 @@ if (isset($_POST['comment']) && isset($_POST['postID'])){
     $comment = $_POST['comment'];
     $postID = $_POST['postID'];
 
+    if ($comment == ""){
+        $_SESSION["error"] = "Oops you can't enter empty comment.";
+        header("Location: FeedPage.php");
+        return;
+    }
+
     $db = new DatabaseHelper();
     $result = $db->InsertNewComment($postID, $comment, $loggedUser);
 

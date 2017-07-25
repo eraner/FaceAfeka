@@ -12,7 +12,7 @@ $username = $_POST['loggedUser'];
 $imgs = UploadImgs($imgScr);
 
 $db = new DatabaseHelper();
-$result = $db->InsertNewPost($status, $imgs[0], $username, $privacy);
+$result = $db->InsertNewPost($status, $imgs, $username, $privacy);
 if($result == true){
     header("Location: FeedPage.php");
     return;

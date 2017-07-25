@@ -40,6 +40,7 @@ function PrintStatusesListHTML($postDetailsArr){
     foreach ($postDetailsArr as $postDetails) {
         printSinglePost($postDetails);
     }
+
     PrintThumbModalScript();
 }
 
@@ -51,27 +52,4 @@ function PrintThumbModalScript(){
                     </div>
                     <script src=\"../JS/ThumbModal.js\"></script>";
 }
-
-//function PrintScript(){
-//    echo "<script>
-//                var cacheData;
-//                var data = $('#main').html();
-//                $('#submitPost').click(function() {
-//                    alert('works');
-//                  $.ajax({
-//                    url: 'getPosts.php',
-//                    method: 'POST',
-//                    data: data,
-//                    dataType: 'html',
-//                    success: function(data) {
-//                      if(data !== cacheData){
-//                          cacheData = data;
-//                          var result = $('<div />').append(data).find('#main').html();
-//                          $('#main').html(result);
-//                      }
-//                    }
-//                  });
-//                });
-//            </script>";
-//}
 

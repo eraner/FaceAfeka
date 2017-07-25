@@ -326,6 +326,24 @@ body{
     background-color: darkgreen;
 }
 
+.navbar > ul > li > a.avatar{
+    padding: 2px 10px;
+    position: fixed;
+    right: 100px;
+}
+
+.navbar > ul > li > a.avatar > img.avatar{
+    margin-top: 0px;
+    align-self: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+}
+
+.navbar > ul > li > a.avatar:hover{
+    background-color: transparent;
+}
+
 .navbar > ul > li > a.logout {
     position: fixed;
     right: 0;
@@ -335,7 +353,7 @@ body{
     height: 100%;
     width: 0;
     position: fixed;
-    z-index: 1;
+    z-index: 20;
     top: 0;
     right: 0;
     background-color: #111;
@@ -348,10 +366,11 @@ body{
 .sidenav a {
     padding: 8px 8px 8px 16px;
     text-decoration: none;
-    font-size: 25px;
+    font-size: 35px;
     color: #4CAF50;
     display: block;
     transition: 0.3s;
+    margin-right: 10px;
 }
 
 .sidenav a.closebtn:hover , .offcanvas a:focus{
@@ -375,8 +394,8 @@ body{
 }
 
 img.friendImg{
-    max-width: 30px;
-    max-height: 30px;
+    max-width: 50px;
+    max-height: 50px;
     margin-left: 8px;
     margin-right: 8px ;
 
@@ -387,8 +406,11 @@ img.friendImg{
 }
 
 #feed{
+    width: 130%;
     padding: 16px;
-    margin: 0 auto;
+    margin-left: 25%;
+    margin-right: 25%;
+    position: relative;
     align-items: center;
     align-content: center;
     align-self: center;

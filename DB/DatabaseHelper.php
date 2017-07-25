@@ -138,13 +138,22 @@ class DatabaseHelper {
      * @param $privacy - Public/Private.
      */
     function InsertNewPost($status, $imgSrc, $publisher, $privacy){
+        $imgsCount = count($imgSrc);
+        $imgsAll = "";
+        for ($i =0; $i < $imgsCount; $i++){
+            if ($i == 0 ){
+                $imgsAll .= $imgSrc[$i];
+            }else{
+                $imgsAll .= ",".$imgSrc[$i];
+            }
+        }
 
         $status = addslashes($status);
-        $imgSrc = addslashes($imgSrc);
+        $imgsAll = addslashes($imgsAll);
         $publisher = addslashes($publisher);
 
         $insert_q = "INSERT INTO Posts (Status, ImgSrc, Publisher, Privacy, Date) VALUES (";
-        $insert_q .= "'".$status."', '".$imgSrc."', '".$publisher."', '".$privacy."', now() );";
+        $insert_q .= "'".$status."', '".$imgsAll."', '".$publisher."', '".$privacy."', now() );";
 
         $result = $this->db_query($insert_q);
 

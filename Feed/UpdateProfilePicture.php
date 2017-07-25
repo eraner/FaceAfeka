@@ -13,9 +13,10 @@ $img = $_FILES['pic'];
 
 $result = UpdateProfilePicture($loggedUser, $img);
  if ($result == true){
-     echo "Picture uploaded successfully";
+     header("Location: FeedPage.php");
      return;
  }else{
-     echo "Picture upload failed.";
+     $_SESSION['error'] = "Your Picture upload failed.";
+     header("Location: FeedPage.php");
      return;
  }

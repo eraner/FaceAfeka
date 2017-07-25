@@ -12,7 +12,7 @@ function PrintHeadHTML(){
             <meta name=\"viewport\"
                 content=\"width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0\">
             <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">
-            <title>Document</title>
+            <title>FaceAfeka</title>
             <link href=\"../CSS/css.css\" rel=\"stylesheet\" type='text/css'/>
             <link href=\"../CSS/postCss.css\" rel=\"stylesheet\" type='text/css'/>
             <link href=\"../CSS/SearchFriends.css\" rel=\"stylesheet\" type='text/css'/>
@@ -58,9 +58,12 @@ function AddTopNavigationBar($loggedUser){
     unset($_SESSION['error']);
 
     echo       "</li>
-                <li><a href='#' class='logout' onclick='document.location.href=\"../Login/Logout.php\"'>
-                    <span class=\"glyphicon glyphicon-log-out\"></span>  Logout</a> 
-                </li>
+                    <li><a class='avatar'>
+                        Hi ".$loggedUser." <img class='avatar' src=\"".$userProfileImgSrc."\"> </a>
+                    </li>
+                    <li><a href='#' class='logout' onclick='document.location.href=\"../Login/Logout.php\"'>
+                        <span class=\"glyphicon glyphicon-log-out\"></span>  Logout</a> 
+                    </li>
                 
            </ul>";
     echo "</div>"; /**navbar /div*/
@@ -71,7 +74,7 @@ function AddTopNavigationBar($loggedUser){
     $db = new DatabaseHelper();
     $friends = $db->GetUsersFriends($loggedUser);
     foreach ($friends as $friend){
-        echo "<a href=\"#\"><img class='friendImg' src=\"../Resources/Images/profile-icon.png\">".$friend."</a>\n";
+        echo "<a href=\"#\"><img class='friendImg' src=\"".GetUserProfileImgOrDefault($friend)."\">".$friend."</a>\n";
     }
     echo "</div>";
 
@@ -89,7 +92,6 @@ function AddTopNavigationBar($loggedUser){
                 <textarea name=\"status\" placeholder=\"Enter your status here\" rows=\"10\" cols=\"70\" required></textarea>
                 </td>
             </tr>
-            <!--TODO:Multiple pictures -->
             <tr>
                 <td><input type=\"file\" name=\"pic[]\" multiple accept=\"image/*\"></td>
             </tr></br>
@@ -138,6 +140,7 @@ function AddTopNavigationBar($loggedUser){
 }
 
 function printSinglePost(PostDetails $post){
+    /** Post images setup. */
     $imgs = explode(',', $post->imgSrc);
     $imgs_print = "";
     foreach ($imgs as $img_src){
@@ -146,7 +149,10 @@ function printSinglePost(PostDetails $post){
             $imgs_print .= "<img onclick='EnlargeImg(\"$actualSrc\")' src=\"" . UPLOADED_THUMBS_LOCATION . $img_src . "\" alt=\"photo\">";
         }
     }
+    /** Post user profile image setup. */
+    $userProfileSrc = GetUserProfileImgOrDefault($post->publisher);
 
+    /** Comments setup */
     $comments_count = count($post->commentArray);
     if ($comments_count > 0){
         $comment_header = "<a class='userComment'><span class=\"glyphicon glyphicon-comment\"> </span>  ".$comments_count." comments </a>";
@@ -155,12 +161,12 @@ function printSinglePost(PostDetails $post){
     }
     $comments_print = "";
     foreach ($post->commentArray as  $comment){
-        //$comment = cast('Comment', $comment);
+        $userImgSrc = GetUserProfileImgOrDefault($comment->username);
         $temp = <<<EOT
         <li class="postLayout">
                         <div class="postLayout-left">
                             <a href="">
-                                <img src="../Resources/UploadedImgs/woman.png" class="commenter-img">
+                                <img src="$userImgSrc" class="commenter-img">
                             </a>
                         </div>
                         <div class="postLayout-body">
@@ -185,7 +191,7 @@ EOT;
 
                         <div class="postLayout-left">
                             <a href="">
-                                <img src="../Resources/UploadedImgs/man.png" class="postLayout-object">
+                                <img src="$userProfileSrc" class="postLayout-object">
                             </a>
                         </div>
                         <div class="postLayout-header-body">
@@ -230,7 +236,6 @@ EOT;
             </div>
         </div>
     </div>
-
 </div>
 EOT;
 
