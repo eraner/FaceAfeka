@@ -247,13 +247,11 @@ EOT;
                     </div>
                 </div>
                 <div class="comments-header">
-                    <form method="post" action="SetLike.php">
-                    <button id='LikeBtn' type="submit" class="btn btn-primary" style="position:relative; margin:5px">
+                    <button onclick="SendLikesAjax($post->postID)" id='LikeBtn' type="submit" class="btn btn-primary" style="position:relative; margin:5px">
                         <span class="glyphicon glyphicon-thumbs-up"></span> <span id="like$post->postID">Like</span>
                         <span class="badge" id="numOfLikes$post->postID">$post->likes</span>
                         <input type="hidden" name="postID" value="$post->postID">
                     </button>
-                    </form>
                     $comment_header
 
                 </div>
