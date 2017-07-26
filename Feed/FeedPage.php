@@ -29,16 +29,16 @@ echo "<body>";
 AddTopNavigationBar($loggedUser);
 
 echo "<div class='main' id='feed'>";
-PrintStatusesListHTML($postDetailsArr);
+PrintStatusesListHTML($postDetailsArr, $loggedUser);
 echo "</div>";
 
 echo "</body>";
 echo "</html>";
 
-function PrintStatusesListHTML($postDetailsArr){
+function PrintStatusesListHTML($postDetailsArr, $loggedUser){
 
     foreach ($postDetailsArr as $postDetails) {
-        printSinglePost($postDetails);
+        printSinglePost($postDetails, $loggedUser);
     }
 
     PrintThumbModalScript();

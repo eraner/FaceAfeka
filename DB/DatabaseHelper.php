@@ -307,4 +307,16 @@ class DatabaseHelper {
 
         return $result;
     }
+
+    /** Updates the post privacy by it's ID.
+     * @param $postID
+     * @param $newPrivacy
+     * @return bool|mysqli_result
+     */
+    function UpdatePostPrivacy($postID, $newPrivacy){
+        $query = "UPDATE Posts SET Privacy = '".$newPrivacy."' WHERE PostID = ".$postID.";";
+        $result = $this->db_query($query);
+
+        return $result;
+    }
 }

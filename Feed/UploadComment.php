@@ -15,7 +15,7 @@ if (isset($_POST['comment']) && isset($_POST['postID'])){
     $postID = $_POST['postID'];
 
     if ($comment == ""){
-        $_SESSION["error"] = "Oops you can't enter empty comment.";
+        $_SESSION['error'] = "Oops you can\'t enter empty comment.";
         header("Location: FeedPage.php");
         return;
     }

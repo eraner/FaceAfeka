@@ -21,6 +21,7 @@ function PrintHeadHTML(){
             <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js\"></script>
             <script src=\"../JS/FriendsBar.js\"></script>
             <script src=\"../JS/SetLike.js\"></script>
+            <script src=\"../JS/PrivacyHandler.js\"></script>
         </head>";
 }
 
@@ -58,7 +59,7 @@ function AddTopNavigationBar($loggedUser){
     }
     unset($_SESSION['error']);
 
-    echo       "</li>
+    echo "</li>
                     <li><a class='avatar'>
                         Hi ".$loggedUser." <img class='avatar' src=\"".$userProfileImgSrc."\"> </a>
                     </li>
@@ -140,7 +141,7 @@ function AddTopNavigationBar($loggedUser){
 
 }
 
-function printSinglePost(PostDetails $post){
+function printSinglePost(PostDetails $post, $loggedUser){
     /** Post images setup. */
     $imgs = explode(',', $post->imgSrc);
     $imgs_print = "";
@@ -150,6 +151,10 @@ function printSinglePost(PostDetails $post){
             $imgs_print .= "<img onclick='EnlargeImg(\"$actualSrc\")' src=\"" . UPLOADED_THUMBS_LOCATION . $img_src . "\" alt=\"photo\">";
         }
     }
+    if ($imgs_print != ""){ //there is images in the post
+        $imgs_print = "<hr />".$imgs_print;
+    }
+
     /** Post user profile image setup. */
     $userProfileSrc = GetUserProfileImgOrDefault($post->publisher);
 
@@ -179,7 +184,38 @@ function printSinglePost(PostDetails $post){
 EOT;
         $comments_print .= $temp;
     }
-    $like = "Like";
+
+    /** Setup privacy change option */
+    $privacyLayout = "";
+    if ($loggedUser == $post->publisher){
+        if ($post->privacy == "Private"){
+            $privateBtn = "active";
+            $privateChecked = "checked";
+            $publicBtn = "";
+            $publicChecked = "";
+        }else{
+            $privateBtn = "";
+            $privateChecked = "";
+            $publicBtn = "active";
+            $publicChecked = "checked";
+        }
+        $privacyLayout = <<<EOT
+                        <div class="postLayout-right">
+                            <div class="input-group" data-toggle="buttons" >
+                                  <label class="btn btn-primary btn-sm $privateBtn" id='Privatelbl_$post->postID'  style="width: 70px">
+                                    <input type="radio" name="options" onchange="ChangePrivacy($post->postID, 'Private')" 
+                                        id="PrivateRadio_$post->postID" autocomplete="off" $privateChecked> Private
+                                  </label>
+                                  <label class="btn btn-primary btn-sm $publicBtn" id='Publiclbl_$post->postID' style="width: 70px">
+                                    <input type="radio" name="options" onchange="ChangePrivacy($post->postID, 'Public')" 
+                                        id="PublicRadio_$post->postID" autocomplete="off" $publicChecked> Public
+                                  </label>
+                            </div>
+                        </div>
+EOT;
+
+    }
+
     $postStr = <<<EOT
 <div class="timeline row" data-toggle="isotope">
 
@@ -199,6 +235,7 @@ EOT;
                             <div class="postLayout-heading"><a class="user">$post->publisher</a></div>
                             <div class="postLayout-bottom"><div class="header-date">on $post->date</div></div>
                         </div>
+                        $privacyLayout
                     </div>
                 </div>
 
@@ -245,3 +282,4 @@ EOT;
 
     echo $postStr;
 }
+
