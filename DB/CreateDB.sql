@@ -14,6 +14,7 @@ INSERT into Users (Username, Password) values ('OhadCohen', 'f45fb23a59cc8bcd9de
 INSERT into Users (Username, Password) values ('NirLevi', 'd75f00b502dc1f485f80141dac1a38bc');
 INSERT into Users (Username, Password) values ('YaelGersh', '354b9213c1464bccf703d6ca97186827');
 INSERT into Users (Username, Password) values ('AviElgal', '2700ba29cd5b2b69e9dbcbc31d221ae5');
+INSERT into Users (Username, Password) values ('Omri Koresh', '7a1d24e641b6cf74f1c5b0e7fd9b8f46');
 
 CREATE TABLE Friends(
   User1 VARCHAR(45) NOT NULL,
