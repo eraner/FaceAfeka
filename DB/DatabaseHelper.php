@@ -302,9 +302,12 @@ class DatabaseHelper {
      * @return bool|mysqli_result
      */
     function SetLikes($postID, $likes){
-        $query = "UPDATE Posts SET Likes = $likes WHERE PostID = $postID";
+        $query = "UPDATE Posts SET Likes = ".$likes." WHERE PostID = ".$postID.";";
         $result = $this->db_query($query);
 
-        return $result;
+        if($result)
+            return $likes;
+        else
+            return -1;
     }
 }

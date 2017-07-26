@@ -1,3 +1,24 @@
-/**
- * Created by elaudin on 25-Jul-17.
- */
+
+
+function SendLikesAjax(postID){
+    $.ajax({
+        type: "POST",
+        url: "SetLike.php",
+        data: {
+            postID: postID ,
+            likeUnlike: document.getElementById("like"+postID).innerHTML ,
+            numOfLikes: document.getElementById("numOfLikes"+postID).innerHTML
+        },
+
+        success: function(data){
+            if(data == "-1"){
+                alert("Something happened. couldn't like");
+                return;
+            }
+            document.getElementById("like"+postID).innerHTML =
+                ((document.getElementById("like"+postID).innerHTML == "Like") ? "Unlike" : "Like");
+            $("#numOfLikes"+postID).html(data);
+        }
+    });
+}
+
