@@ -24,7 +24,7 @@ if (isset($_POST["username"]) && isset($_POST["password"])
             header("Location: ..\\index.php");
             return;
         } else {
-            $_SESSION['error'] = "Something wen't wrong, the user couldn't register on the server DB.";
+            $_SESSION['error'] = "Something went wrong, the user couldn't register on the server DB.";
             header("Location: Signup.php");
         }
     }

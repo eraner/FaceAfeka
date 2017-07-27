@@ -13,7 +13,9 @@ if (isset($_POST["username"]) && isset($_POST["password"])){
         header("Location: ../Feed/FeedPage.php");
         return;
     } else {
-        echo "Not Cool At All!!!";
+        $_SESSION['error'] = "Oops, username or password is incorrect.";
+        header("Location: ../index.php");
+        return;
     }
 }
 

@@ -6,7 +6,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>FaceAfeka</title>
 </head>
 <body>
     <!--Start login-style -->
@@ -25,6 +25,13 @@
                 for free now!
             </div>
         </form>
+        <?php
+        session_start();
+        if (isset($_SESSION['error'])){
+            echo "</br><span id=\"errorLabel\" style=\"color:red; font-size: 25px; font-family: 'Comic Sans MS', sans-serif;\">".$_SESSION['error']."</span>";
+        }
+        unset($_SESSION['error']);
+        ?>
     </div>
     <!--End login-style -->
 </body>
