@@ -19,12 +19,18 @@ function UploadPost(){
             data: formData,
             processData: false,
             contentType: false,
+            async: false,
             success: function (data) {
-                document.writeln(data);
-                // alert(data);
+
+                if (data){
+                    $('#feed').html(data);
+                }
+                else{
+                    alert("Failed to upload your post.");
+                }
             }
         });
     }else{
-        alert("wrong");
+        alert("Failed to upload your post.");
     }
 }

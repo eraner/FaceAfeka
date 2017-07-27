@@ -1,4 +1,6 @@
 <?php
+require_once('../Feed/PostDetails.php');
+require_once('../Feed/Comment.php');
 /**
  * Database class for easy-to-use functions.
  */
