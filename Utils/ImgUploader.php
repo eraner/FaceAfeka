@@ -44,8 +44,8 @@ function UploadImgs($imgs){
             move_uploaded_file($val['tmp_name'],UPLOADED_IMAGES_LOCATION.$newname);
             if (!empty($val['tmp_name'])){
                 array_push($images_arr, $newname);
+                CreateThumb(UPLOADED_IMAGES_LOCATION.$newname, UPLOADED_THUMBS_LOCATION.$newname, 100);
             }
-            CreateThumb(UPLOADED_IMAGES_LOCATION.$newname, UPLOADED_THUMBS_LOCATION.$newname, 100);
         }
     }
 
