@@ -281,3 +281,18 @@ EOT;
     echo $postStr;
 }
 
+function PrintStatusesListHTML($postDetailsArr, $loggedUser){
+
+    foreach ($postDetailsArr as $postDetails) {
+        printSinglePost($postDetails, $loggedUser);
+    }
+}
+
+function PrintThumbModalScript(){
+    echo "<div id=\"myModal\" class=\"modal\">
+                      <span class=\"close\">X</span>
+                      <img class=\"modal-content\" id=\"img01\">
+                    </div>
+                    <script src=\"../JS/ThumbModal.js\"></script>";
+}
+

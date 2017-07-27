@@ -31,24 +31,9 @@ AddTopNavigationBar($loggedUser);
 echo "<div class='main' id='feed'>";
 PrintStatusesListHTML($postDetailsArr, $loggedUser);
 echo "</div>";
-
+PrintThumbModalScript();
 echo "</body>";
 echo "</html>";
 
-function PrintStatusesListHTML($postDetailsArr, $loggedUser){
 
-    foreach ($postDetailsArr as $postDetails) {
-        printSinglePost($postDetails, $loggedUser);
-    }
-
-    PrintThumbModalScript();
-}
-
-function PrintThumbModalScript(){
-    echo "<div id=\"myModal\" class=\"modal\">
-                      <span class=\"close\">X</span>
-                      <img class=\"modal-content\" id=\"img01\">
-                    </div>
-                    <script src=\"../JS/ThumbModal.js\"></script>";
-}
 
