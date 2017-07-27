@@ -22,6 +22,7 @@ function PrintHeadHTML(){
             <script src=\"../JS/FriendsBar.js\"></script>
             <script src=\"../JS/SetLike.js\"></script>
             <script src=\"../JS/PrivacyHandler.js\"></script>
+            <script src=\"../JS/PostHandler.js\"></script>
         </head>";
 }
 
@@ -85,17 +86,17 @@ function AddTopNavigationBar($loggedUser){
             <div class='modal-dialog'>";
     /**Set Post window content*/
     echo "<div class=\"modal-style\">
-    <form action=\"UploadPost.php\" method='post' multipart=\"multiple\" enctype=\"multipart/form-data\">
-        <input type='hidden' name='loggedUser' value='".$loggedUser."'/>
+    <form id='postForm' method='post' multipart=\"multiple\" enctype=\"multipart/form-data\">
+        <input type='hidden' id='loggedUser' value='".$loggedUser."'/>
         <center><table>
             <tr><td><h1>Your Post</h1></td></tr>
             <tr>
                 <td>
-                <textarea name=\"status\" placeholder=\"Enter your status here\" rows=\"10\" cols=\"70\" required></textarea>
+                <textarea id=\"status\" placeholder=\"Enter your status here\" rows=\"10\" cols=\"70\" required></textarea>
                 </td>
             </tr>
             <tr>
-                <td><input type=\"file\" name=\"pic[]\" multiple accept=\"image/*\"></td>
+                <td><input type=\"file\" id=\"pic[]\" multiple accept=\"image/*\"></td>
             </tr></br>
             <table>
                 <tr>
@@ -104,7 +105,7 @@ function AddTopNavigationBar($loggedUser){
                 </tr>
             </table>
             <tr></br>
-                <td><input type=\"submit\" value=\"Post Now!\"></td>
+                <td><button onclick='UploadPost()' type=\"submit\" value=\"Post Now!\"></td>
             </tr>
         </table>
         </center>
