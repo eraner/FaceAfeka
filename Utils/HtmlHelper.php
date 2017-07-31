@@ -304,7 +304,7 @@ function GetCommentSection($post){
                             </a>
                         </div>
                         <div class="postLayout-body">
-                            <a href="" class="author">$comment->username</a>
+                            <a class="author">$comment->username</a>
                             <span>$comment->comment</span>
                             <div class="date">$comment->date</div>
                         </div>
