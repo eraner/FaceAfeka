@@ -33,7 +33,7 @@ function AddTopNavigationBar($loggedUser){
     /** Navigation Bar Init*/
     echo "<div class='navbar'>
            <ul>
-                <li><a class=\"active\" href='#'>FaceAfeka</a> </li>
+                <li><a class=\"active\" href='FeedPage.php'>FaceAfeka</a> </li>
                 <li>
                     <button type='button' data-toggle='modal' data-target='#profileModal'> 
                         <span class=\"glyphicon glyphicon-user\"></span> Profile
@@ -103,10 +103,10 @@ function AddTopNavigationBar($loggedUser){
                 <tr>
                     <td>
                         <div class=\"input-group\" data-toggle=\"buttons\" >
-                          <label class=\"btn\"  >
+                          <label class=\"btn\" id='publicID'>
                             <input type=\"radio\" name=\"privacy\" value='Public' required> Public
                           </label>
-                          <label class=\"btn\"  >
+                          <label class=\"btn\" id='privateID'>
                             <input type=\"radio\" name=\"privacy\" value='Private' required> Private
                           </label>
                         </div>
@@ -148,6 +148,11 @@ function AddTopNavigationBar($loggedUser){
     </div>";
     echo "</div>";
     echo "</div>";
+    echo "<script>
+    $('#postForm').on('submit', function(e) {
+      e.preventDefault();
+    })
+</script>";
 
 }
 
@@ -257,7 +262,6 @@ EOT;
                                 <button onclick="UploadComment($post->postID)" class="btn btn-default">
                                 <span class="glyphicon glyphicon-comment"></span>
                             </span>
-                            
                         </div>
                     </li>
                 </ul>

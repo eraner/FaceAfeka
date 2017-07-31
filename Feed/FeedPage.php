@@ -29,7 +29,9 @@ echo "<body>";
 AddTopNavigationBar($loggedUser);
 
 echo "<div class='main' id='feed'>";
+echo "<div id='posts'>";
 PrintStatusesListHTML($postDetailsArr, $loggedUser);
+echo "</div>";
 echo "</div>";
 PrintThumbModalScript();
 echo "</body>";
