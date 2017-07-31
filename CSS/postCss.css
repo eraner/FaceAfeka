@@ -57,6 +57,12 @@ a.user{
     color: #111111;
 }
 
+a.user:hover{
+    color: #111111;
+    cursor: default;
+    text-decoration: none;
+}
+
 span.date {
     color: lightgrey;
 }
@@ -97,6 +103,12 @@ a.author {
     font-size: 14px;
     color: #26a69a;
     padding-right: 5px;
+}
+
+a.author:hover  {
+    text-decoration: none;
+    color: #26a69a;
+    cursor: default;
 }
 
 .header-date {
