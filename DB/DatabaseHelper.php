@@ -177,6 +177,41 @@ class DatabaseHelper {
         return $userList;
     }
 
+    /**returns postDetails of a post by id.
+     * @param $postID
+     * @return int|PostDetails
+     */
+    function GetPostByID($postID){
+        if($postID==null)
+            return -1;
+
+        $query = "SELECT * FROM Posts WHERE PostID = $postID;";
+        $result = $this->db_query($query);
+
+        if(!$result)
+            return -1;
+
+        if(mysqli_num_rows($result) != 1)
+            return -1;
+
+        $row = $result->fetch_assoc();
+
+        $postId = $row['PostID'];
+        $comment_query = "SELECT * FROM Comments WHERE (PostID = ".$postId.") ORDER BY Date ASC;";
+        $comments_result = $this->db_query($comment_query);
+        $comments = array();
+        while ($com = $comments_result->fetch_assoc()){
+            $c_date = $this->GetFormattedDate($com['Date']);
+            $comments[] = new Comment($com['PostID'], $com['Comment'], $com['Username'], $c_date);
+        }
+
+        $f_date = $this->GetFormattedDate($row['Date']);
+        $post = new PostDetails($row['PostID'], $row['Status'], $row['ImgSrc'], $row['Publisher'],
+            $row['Likes'], $f_date, $row['Privacy'], $comments);
+
+        return $post;
+    }
+
     /**Gets Array of friends and returns array of posts of friends.
      * first friend is the user all the others are his friends
      * @return PostDetails[] - on success - Array of StatusDetails from requested publisher (can be empty list),
@@ -204,7 +239,7 @@ class DatabaseHelper {
 
         while ($row = $result->fetch_assoc()){
             $postId = $row['PostID'];
-            $comment_query = "SELECT * FROM Comments WHERE (PostID = ".$postId.") ORDER BY Date ASC;;";
+            $comment_query = "SELECT * FROM Comments WHERE (PostID = ".$postId.") ORDER BY Date ASC;";
             $comments_result = $this->db_query($comment_query);
             $comments = array();
             while ($com = $comments_result->fetch_assoc()){

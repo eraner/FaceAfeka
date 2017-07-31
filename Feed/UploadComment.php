@@ -1,36 +1,36 @@
 <?php
 require_once ('../DB/DatabaseHelper.php');
+require_once ('../Utils/HtmlHelper.php');
 
-session_start();
-
-if (!isset($_SESSION["loggedUser"]) ){
-    header("HTTP/1.0 404 Not Found");
-    die();
+if (!isset($_POST["loggedUser"]) ){
+    echo "Failed";
+    return;
 }
-$loggedUser = $_SESSION['loggedUser'];
-
+$loggedUser = $_POST['loggedUser'];
 
 if (isset($_POST['comment']) && isset($_POST['postID'])){
     $comment = $_POST['comment'];
     $postID = $_POST['postID'];
 
-    if ($comment == ""){
-        $_SESSION['error'] = "Oops you can\'t enter empty comment.";
-        header("Location: FeedPage.php");
-        return;
-    }
+//    if ($comment == ""){
+//        $_SESSION['error'] = "Oops you can\'t enter empty comment.";
+//        header("Location: FeedPage.php");
+//        return;
+//    }
 
     $db = new DatabaseHelper();
     $result = $db->InsertNewComment($postID, $comment, $loggedUser);
 
     if ($result){
-        header("Location: FeedPage.php");
-        return;
+        $post = $db->GetPostByID($postID);
+        $commentDetails = GetCommentSection($post);
+        echo json_encode(
+            array("post" => $commentDetails[0],
+                "commentsHeader" => $commentDetails[1])
+        );
+
     }else{
-        header("HTTP/1.0 404 Not Found");
-        die();
+        echo "Failed";
+
     }
 }
-
-header("Location: FeedPage.php");
-return;

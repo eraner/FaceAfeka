@@ -23,6 +23,7 @@ function PrintHeadHTML(){
             <script src=\"../JS/SetLike.js\"></script>
             <script src=\"../JS/PrivacyHandler.js\"></script>
             <script src=\"../JS/PostHandler.js\"></script>
+            <script src=\"../JS/CommentHandler.js\"></script>
         </head>";
 }
 
@@ -160,31 +161,10 @@ function printSinglePost(PostDetails $post, $loggedUser){
     $userProfileSrc = GetUserProfileImgOrDefault($post->publisher);
 
     /** Comments setup */
-    $comments_count = count($post->commentArray);
-    if ($comments_count > 0){
-        $comment_header = "<a class='userComment'><span class=\"glyphicon glyphicon-comment\"> </span>  ".$comments_count." comments </a>";
-    }else{
-        $comment_header = "<p><span class=\"glyphicon glyphicon-comment\"> </span> Be the first to comment</p>";
-    }
-    $comments_print = "";
-    foreach ($post->commentArray as  $comment){
-        $userImgSrc = GetUserProfileImgOrDefault($comment->username);
-        $temp = <<<EOT
-        <li class="postLayout">
-                        <div class="postLayout-left">
-                            <a href="">
-                                <img src="$userImgSrc" class="commenter-img">
-                            </a>
-                        </div>
-                        <div class="postLayout-body">
-                            <a href="" class="author">$comment->username</a>
-                            <span>$comment->comment</span>
-                            <div class="date">$comment->date</div>
-                        </div>
-                    </li>
-EOT;
-        $comments_print .= $temp;
-    }
+    $arr = GetCommentSection($post);
+    $comments_print = $arr[0];
+    $comment_header = $arr[1];
+
 
     /** Setup privacy change option */
     $privacyLayout = "";
@@ -253,24 +233,24 @@ EOT;
                         <span class="badge" id="numOfLikes$post->postID">$post->likes</span>
                         <input type="hidden" name="postID" value="$post->postID">
                     </button>
-                    $comment_header
-
+                    <div id="comment-header_$post->postID">
+                        $comment_header
+                    </div>
                 </div>
                 <ul class="comments">
-                    $comments_print
+                    <div id="CommentsSection_$post->postID">
+                        $comments_print
+                    </div>
                     <li class="comment-form">
-                        <form class="form-group" role="form" method="post" action="UploadComment.php" >
                         <div class="input-group">
-                            <input type="hidden" name="postID" value="$post->postID"/>
-                            <input type="text" name="comment" class="form-control" />
+                            <input type="text" id="comment_$post->postID" class="form-control" />
                              
                             <span class="input-group-btn">
-                                <button  type="submit" class="btn btn-default">
+                                <button onclick="UploadComment($post->postID)" class="btn btn-default">
                                 <span class="glyphicon glyphicon-comment"></span>
                             </span>
                             
                         </div>
-                        </form>
                     </li>
                 </ul>
             </div>
@@ -295,5 +275,35 @@ function PrintThumbModalScript(){
                       <img class=\"modal-content\" id=\"img01\">
                     </div>
                     <script src=\"../JS/ThumbModal.js\"></script>";
+}
+
+function GetCommentSection($post){
+    /** Comments setup */
+    $comments_count = count($post->commentArray);
+    if ($comments_count > 0){
+        $comment_header = "<a class='userComment'><span class=\"glyphicon glyphicon-comment\"> </span>  ".$comments_count." comments </a>";
+    }else{
+        $comment_header = "<p><span class=\"glyphicon glyphicon-comment\"> </span> Be the first to comment</p>";
+    }
+    $comments_print = "";
+    foreach ($post->commentArray as  $comment) {
+        $userImgSrc = GetUserProfileImgOrDefault($comment->username);
+        $temp = <<<EOT
+        <li class="postLayout">
+                        <div class="postLayout-left">
+                            <a href="">
+                                <img src="$userImgSrc" class="commenter-img">
+                            </a>
+                        </div>
+                        <div class="postLayout-body">
+                            <a href="" class="author">$comment->username</a>
+                            <span>$comment->comment</span>
+                            <div class="date">$comment->date</div>
+                        </div>
+                    </li>
+EOT;
+        $comments_print .= $temp;
+    }
+    return array($comments_print, $comment_header);
 }
 
