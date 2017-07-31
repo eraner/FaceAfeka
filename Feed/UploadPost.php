@@ -3,8 +3,6 @@ require_once ("..\Utils\HtmlHelper.php");
 require_once ("..\DB\DatabaseHelper.php");
 require_once ("..\Utils\ImgUploader.php");
 
-
-
 $status = $_POST['status'];
 if (isset($_FILES['pic'])){
     $imgScr = $_FILES['pic'];

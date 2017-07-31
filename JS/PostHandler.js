@@ -24,15 +24,20 @@ function UploadPost(){
             processData: false,
             contentType: false,
             success: function (data) {
-
                 if (data){
-                    $('#feed').html(data);
+                    /**close post dialog and set new posts div*/
+                    $('#myPost').modal('hide');
+                    $('#posts').html(data);
+
+                    /**clear Post details*/
+                    document.getElementById("postForm").reset();
+                    document.getElementById("publicID").className = "btn";
+                    document.getElementById("privateID").className = "btn";
                 }
                 else{
                     alert("Failed to upload your post.");
                 }
-            },
-            async: false
+            }
         });
     }else{
         alert("Failed to upload your post.");
