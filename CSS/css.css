@@ -252,6 +252,16 @@ body{
     padding: 20px;
 }
 
+.modal-style form label.btn {
+    background:#28344B;
+    color: white;
+}
+
+.modal-style form label.btn.active {
+    background:#3C67B5;
+    color: white;
+}
+
 .modal-style .profileImg{
     align-self: center;
     width: 400px;

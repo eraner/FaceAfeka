@@ -9,11 +9,11 @@ CREATE TABLE Users(
   PRIMARY KEY (UserID)
 );
 
-INSERT into Users (Username, Password) values ('EranLaudin', '393cf13dea198de16792babb0e6628d5');
-INSERT into Users (Username, Password) values ('OhadCohen', 'f45fb23a59cc8bcd9de4952b33f473dc');
-INSERT into Users (Username, Password) values ('NirLevi', 'd75f00b502dc1f485f80141dac1a38bc');
-INSERT into Users (Username, Password) values ('YaelGersh', '354b9213c1464bccf703d6ca97186827');
-INSERT into Users (Username, Password) values ('AviElgal', '2700ba29cd5b2b69e9dbcbc31d221ae5');
+INSERT into Users (Username, Password) values ('Eran Laudin', '393cf13dea198de16792babb0e6628d5');
+INSERT into Users (Username, Password) values ('Ohad Cohen', 'f45fb23a59cc8bcd9de4952b33f473dc');
+INSERT into Users (Username, Password) values ('Nir Levi', 'd75f00b502dc1f485f80141dac1a38bc');
+INSERT into Users (Username, Password) values ('Yael Gersh', '354b9213c1464bccf703d6ca97186827');
+INSERT into Users (Username, Password) values ('Avi Elgal', '2700ba29cd5b2b69e9dbcbc31d221ae5');
 INSERT into Users (Username, Password) values ('Omri Koresh', '7a1d24e641b6cf74f1c5b0e7fd9b8f46');
 
 CREATE TABLE Friends(
@@ -23,12 +23,12 @@ CREATE TABLE Friends(
   FOREIGN KEY (User2) REFERENCES Users (Username)
 );
 
-INSERT INTO friends VALUES ('NirLevi', 'EranLaudin');
-INSERT INTO friends VALUES ('NirLevi', 'OhadCohen');
-INSERT INTO friends VALUES ('EranLaudin', 'OhadCohen');
-INSERT INTO friends VALUES ('YaelGersh', 'OhadCohen');
-INSERT INTO friends VALUES ('EranLaudin', 'YaelGersh');
-INSERT INTO friends VALUES ('EranLaudin', 'AviElgal');
+INSERT INTO friends VALUES ('Nir Levi', 'Eran Laudin');
+INSERT INTO friends VALUES ('Nir Levi', 'Ohad Cohen');
+INSERT INTO friends VALUES ('Eran Laudin', 'Ohad Cohen');
+INSERT INTO friends VALUES ('Yael Gersh', 'Ohad Cohen');
+INSERT INTO friends VALUES ('Eran Laudin', 'Yael Gersh');
+INSERT INTO friends VALUES ('Eran Laudin', 'Avi Elgal');
 
 
 CREATE TABLE Posts(
@@ -43,13 +43,13 @@ CREATE TABLE Posts(
 );
 
 INSERT INTO Posts (Status, ImgSrc, Publisher, Privacy, Date) VALUES
-  ('This is a dog status.', '20170719153646889933074.jpg', 'EranLaudin', 'Public', '2017-07-15 15:00:00');
+  ('This is a dog status.', '20170719153646889933074.jpg', 'Eran Laudin', 'Public', '2017-07-15 15:00:00');
 INSERT INTO Posts (Status, ImgSrc, Publisher, Privacy, Date) VALUES
-  ('MyStatus before', '', 'EranLaudin', 'Public', '2017-07-13 20:05:32');
+  ('MyStatus before', '', 'Eran Laudin', 'Public', '2017-07-13 20:05:32');
 INSERT INTO Posts (Status, ImgSrc, Publisher, Privacy, Date) VALUES
-  ('This is a cat status', '201707181724441840804854.png', 'OhadCohen', 'Public', '2017-07-14 14:22:22');
+  ('This is a cat status', '201707181724441840804854.png', 'Ohad Cohen', 'Public', '2017-07-14 14:22:22');
 INSERT INTO Posts (Status, ImgSrc, Publisher, Privacy, Date) VALUES
-  ('Hello World', '201707141001241501264039.png', 'OhadCohen', 'Public', '2017-07-17 20:12:38');
+  ('Hello World', '201707141001241501264039.png', 'Ohad Cohen', 'Public', '2017-07-17 20:12:38');
 
 
 CREATE TABLE Comments(
@@ -61,9 +61,9 @@ CREATE TABLE Comments(
 );
 
 INSERT INTO Comments (PostID, Comment, Username, Date) VALUES
-  (1 , 'Great job, mate!', 'OhadCohen', '2017-07-15 16:05:00');
+  (1 , 'Great job, mate!', 'Ohad Cohen', '2017-07-15 16:05:00');
 INSERT INTO Comments (PostID, Comment, Username, Date) VALUES
-  (1 , ':-)', 'NirLevi', '2017-07-15 20:50:00');
+  (1 , ':-)', 'Nir Levi', '2017-07-15 20:50:00');
 INSERT INTO Comments (PostID, Comment, Username, Date) VALUES
-  (1 , 'lolol', 'EranLaudin', '2017-07-15 17:50:00');
+  (1 , 'lolol', 'Eran Laudin', '2017-07-15 17:50:00');
 

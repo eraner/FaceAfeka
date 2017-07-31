@@ -100,8 +100,16 @@ function AddTopNavigationBar($loggedUser){
             </tr></br>
             <table>
                 <tr>
-                    <td><input type=\"radio\" name=\"privacy\" value=\"Public\" required>Public </br>
-                    <input type=\"radio\" name=\"privacy\" value=\"Private\">Private</td> 
+                    <td>
+                        <div class=\"input-group\" data-toggle=\"buttons\" >
+                          <label class=\"btn\"  >
+                            <input type=\"radio\" name=\"privacy\" value='Public' required> Public
+                          </label>
+                          <label class=\"btn\"  >
+                            <input type=\"radio\" name=\"privacy\" value='Private' required> Private
+                          </label>
+                        </div>
+                    </td>
                 </tr>
             </table>
             <tr></br>
