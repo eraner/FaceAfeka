@@ -1,6 +1,10 @@
 
 
 function UploadPost(){
+    if(document.getElementById("status").value == ""
+        || $("input[name='privacy']:checked").val()==null){
+        return;
+    }
     var formData = new FormData();
     formData.append("status", document.getElementById("status").value);
     formData.append("privacy", $("input[name='privacy']:checked").val());
@@ -19,7 +23,6 @@ function UploadPost(){
             data: formData,
             processData: false,
             contentType: false,
-            async: false,
             success: function (data) {
 
                 if (data){
@@ -28,7 +31,8 @@ function UploadPost(){
                 else{
                     alert("Failed to upload your post.");
                 }
-            }
+            },
+            async: false
         });
     }else{
         alert("Failed to upload your post.");

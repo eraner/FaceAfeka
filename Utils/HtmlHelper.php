@@ -105,7 +105,7 @@ function AddTopNavigationBar($loggedUser){
                 </tr>
             </table>
             <tr></br>
-                <td><button onclick='UploadPost()' type=\"submit\" value=\"Post Now!\"></td>
+                <td><input onclick='UploadPost()' type=\"submit\" value=\"Post Now!\"></td>
             </tr>
         </table>
         </center>
