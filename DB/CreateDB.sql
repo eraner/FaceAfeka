@@ -33,7 +33,7 @@ INSERT INTO friends VALUES ('Eran Laudin', 'Avi Elgal');
 
 CREATE TABLE Posts(
   PostID INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-  Status VARCHAR(45),
+  Status VARCHAR(255),
   ImgSrc VARCHAR(255),
   Publisher VARCHAR(45) NOT NULL,
   Privacy VARCHAR(45) NOT NULL,

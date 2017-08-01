@@ -108,11 +108,14 @@ function UploadBotPost(imgSrc, twitText) {
     var imgSrc = imgSrc;
 
     unirest.post('http://localhost/FaceAfeka/Feed/UploadPost.php')
-        .headers({'Content-Type': 'text/html'})
-        .send('status='+status).send('privacy='+ privacy).send('loggedUser='+loggedUser)
-        .send('pic[]='+imgSrc).end(function (response) {
-        console.log(response.body);
+        .headers({'Content-Type': 'application/x-www-form-urlencoded'}).type('form')
+        .send({'status': status, 'privacy': privacy, 'loggedUser': loggedUser})
+        .end(function (response) {
+            console.log(response.body);
+            if (response.error) {
+                console.log('GET error', response.error);
+            } else {
+                // console.log('GET response', response.body);
+            }
     });
-
-  
 }
