@@ -2,10 +2,9 @@ var Twit = require('twit');
 var config = require('./config');
 var fs = require('fs');
 var mysql = require('mysql');
+// var path = require('path');
 
-var unirest = require('unirest');
-// var request = require('request');
-// var http = require('http');
+var dateFormat = require('dateformat');
 
 const NaturalLanguageUnderstandingV1 = require('watson-developer-cloud/natural-language-understanding/v1.js');
 const LOGGED_USER = "Ohad Cohen";
@@ -34,7 +33,7 @@ con.connect(function(err) {
         "); ";
     con.query(query, function (err, result) {
         if(err) throw err;
-        console.log("Table Created!");
+        console.log("Table Created/Existed!");
     });
 });
 
@@ -59,7 +58,7 @@ function FoundTwit(err, data, response) {
             return;
         }else{
             console.log("Twit " + twitID + " doesn't exist, handling the new twit....");
-            InsertNewTwit(twitID);
+            //InsertNewTwit(twitID);
             AnalyzeNewTwit(twitText);
         }
 
@@ -89,15 +88,21 @@ function AnalyzeNewTwit(twitText){
 
     nlu.analyze(parameters, function (err, response) {
         if(err) throw err;
-        else
-            // console.log(JSON.stringify(response, null, 2));
-        console.log(response.keywords[0]);
 
+        // console.log(JSON.stringify(response, null, 2));
+        var keyWords = "";
+        for(var i=0 ; i < response.keywords.length ; i++)
+            keyWords += response.keywords[i].text + " ";
+
+        console.log("Looking for image according to keywords: "+keyWords);
         /**Function to search and download apropriate image*/
+        var imgDownloader = require('./ImageDownloader');
+        var path = imgDownloader.downloadImageByString(keyWords);
+        console.log(path);
 
 
         /**Upload new post to FaceAfeka.*/
-        UploadBotPost("", twitText);
+        UploadBotPost(path, twitText);
     })
 }
 
@@ -107,15 +112,46 @@ function UploadBotPost(imgSrc, twitText) {
     var loggedUser = LOGGED_USER;
     var imgSrc = imgSrc;
 
-    unirest.post('http://localhost/FaceAfeka/Feed/UploadPost.php')
-        .headers({'Content-Type': 'application/x-www-form-urlencoded'}).type('form')
-        .send({'status': status, 'privacy': privacy, 'loggedUser': loggedUser})
-        .end(function (response) {
-            console.log(response.body);
-            if (response.error) {
-                console.log('GET error', response.error);
-            } else {
-                // console.log('GET response', response.body);
+    var easyImage = require('easyimage');
+    var now = new Date();
+    var temp = imgSrc.split(".");
+    var len = temp.length;
+    var name = dateFormat(now, 'yyyymmddHHMMss') + "." + temp[len-1];
+    console.log(name);
+    console.log(dest);
+    console.log(imgSrc);
+    var dest = '..\\Resources\\UploadedImgs\\'+name;
+    fs.rename(imgSrc,dest);
+    var src = dest;
+
+    dest = '..\\Resources\\Thumbs\\'+name ;
+    easyImage.resize({src: src, dst: dest,
+                        width: 100, height: 100})
+        .then(
+            function (image) {
+                console.log("resized success");
             }
+        ,
+        function (err) {
+
     });
+    status = addslashes(status);
+    var query = "INSERT INTO Posts (Status, ImgSrc, Publisher, Privacy, Date) VALUES "
+    + "('" + status +"', '"+ name +"', '" + loggedUser + "', '"+ privacy + "', now());";
+    console.log(query);
+    con.query(query, function (err, result) {
+        if(err) throw err;
+        console.log("Inserted new Post");
+    });
+}
+
+function addslashes(string) {
+    return string.replace(/\\/g, '\\\\').
+    replace(/\u0008/g, '\\b').
+    replace(/\t/g, '\\t').
+    replace(/\n/g, '\\n').
+    replace(/\f/g, '\\f').
+    replace(/\r/g, '\\r').
+    replace(/'/g, '\\\'').
+    replace(/"/g, '\\"');
 }
