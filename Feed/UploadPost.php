@@ -26,6 +26,4 @@ $friends = $db->GetUsersFriends($username);
 $friends = array_merge($tempArr, $friends);
 $postDetailsArr = $db->GetFriendsPosts($friends);
 
-
-
 PrintStatusesListHTML($postDetailsArr, $username);

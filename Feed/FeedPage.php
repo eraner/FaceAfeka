@@ -6,12 +6,14 @@ require_once ("..\Utils\ImgUploader.php");
 session_start();
 
 if (!isset($_SESSION["loggedUser"]) ){
-    header("HTTP/1.0 404 Not Found");
-    die();
+    header("Location: ..\\index.php");
+    return;
 }
 $loggedUser = $_SESSION['loggedUser'];
 
 $db = new DatabaseHelper();
+
+/**setting friends array with logged user in first position*/
 $tempArr = array($loggedUser);
 $friends = $db->GetUsersFriends($loggedUser);
 $friends = array_merge($tempArr, $friends);
@@ -23,8 +25,6 @@ if ($postDetailsArr == -1){
 
 PrintHeadHTML();
 echo "<body>";
-
-//PrintScript();
 
 AddTopNavigationBar($loggedUser);
 

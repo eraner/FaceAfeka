@@ -109,8 +109,6 @@ function CreateThumb($src, $dest, $desired_width) {
  * @return bool
  */
 function UpdateProfilePicture($username, $img){
-    $img_name = basename($img["name"]);
-    $imgFileType = pathinfo($img_name,PATHINFO_EXTENSION);
     $newName = $username.".jpg";
     $target = UPLOADED_PROFILE_LOCATION.$newName;
 

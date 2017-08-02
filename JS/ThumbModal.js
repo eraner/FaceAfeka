@@ -9,7 +9,6 @@ var modalImg = document.getElementById("img01");
 function EnlargeImg(imgSrc) {
     modal.style.display = "block";
     modalImg.src = imgSrc;
-    //captionText.innerHTML = this.alt;
 }
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];

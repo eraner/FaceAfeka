@@ -6,8 +6,7 @@ function SendLikesAjax(postID){
         url: "SetLike.php",
         data: {
             postID: postID ,
-            likeUnlike: document.getElementById("like"+postID).innerHTML ,
-            numOfLikes: document.getElementById("numOfLikes"+postID).innerHTML
+            likeUnlike: document.getElementById("like"+postID).innerHTML
         },
 
         success: function(data){

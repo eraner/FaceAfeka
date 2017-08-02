@@ -5,12 +5,7 @@ function UploadComment(postID) {
     var loggedUser = document.getElementById("loggedUser").value;
     var comment = document.getElementById("comment_"+postID).value;
 
-    // document.writeln(loggedUser);
-    // document.writeln(postID);
-    // document.writeln(comment);
-    // return;
-
-    if(comment == ""){
+    if(comment == "" || loggedUser == ""){
         return;
     }
     

@@ -53,6 +53,30 @@ class DatabaseHelper {
         return $pass;
     }
 
+    /**@return string which is a list for the query.
+     * @param $users
+     */
+    function MakeUserList($users){
+        $numOfUsers = count($users);
+        $userList = "( ";
+        for($i=1 ; $i < $numOfUsers ; $i++)
+            if( $i != $numOfUsers-1 )
+                $userList .= "'".$users[$i]."', ";
+            else
+                $userList .= "'".$users[$i]."' )";
+
+        return $userList;
+    }
+
+    /**Gets a date and return a formatted date.
+     * @param $date
+     * @return false|string
+     */
+    function GetFormattedDate($date){
+        $temp = DateTime::createFromFormat('Y-m-d H:i:s', $date);
+        return date_format($temp, 'F jS Y \a\t g:ia');
+    }
+
     /** Common Functions: */
 
     /***
@@ -83,7 +107,7 @@ class DatabaseHelper {
             return false;
 
         $c_pass = $this->CalculatePassword($pass);
-        $query = "SELECT username FROM Users WHERE (Username = '".$user."'";
+        $query = "SELECT username FROM Users WHERE (BINARY Username = '".$user."'";
         $query .= " AND Password = '".$c_pass."' );";
 
         $result = $this->db_query($query);
@@ -116,9 +140,9 @@ class DatabaseHelper {
 
     function GetUsersFriends($user){
         $friends = array();
+
         $select_query = "SELECT user2 FROM Friends WHERE (User1 = '".$user."' );";
         $result = $this->db_query($select_query);
-
         while ($row = $result->fetch_assoc()){
             $friends[] = $row["user2"];
         }
@@ -160,21 +184,6 @@ class DatabaseHelper {
         $result = $this->db_query($insert_q);
 
         return $result;
-    }
-
-    /**@return string which is a list for the query.
-     * @param $users
-     */
-    function MakeUserList($users){
-        $numOfUsers = count($users);
-        $userList = "( ";
-        for($i=1 ; $i < $numOfUsers ; $i++)
-            if( $i != $numOfUsers-1 )
-                $userList .= "'".$users[$i]."', ";
-            else
-                $userList .= "'".$users[$i]."' )";
-
-        return $userList;
     }
 
     /**returns postDetails of a post by id.
@@ -310,11 +319,6 @@ class DatabaseHelper {
 
         $result = $this->db_query($insert_q);
         return $result;
-    }
-    
-    function GetFormattedDate($date){
-        $temp = DateTime::createFromFormat('Y-m-d H:i:s', $date);
-        return date_format($temp, 'F jS Y \a\t g:ia');
     }
 
     /**

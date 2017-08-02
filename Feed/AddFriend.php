@@ -28,17 +28,17 @@ if($db->IsUsernameAvailable($userToAdd)){   //username not exists.
     return;
 }
 
-function sendError($errorMsg){
-    $errorMsg = addslashes($errorMsg);
-    $_SESSION['error'] = $errorMsg;
-    header("Location: FeedPage.php");
-}
-
 $result = $db->MakeFriends($loggedUser, $userToAdd);
 if ($result) {
     header("Location: FeedPage.php");
     return;
 } else {
     $_SESSION['error'] = "Something wen't wrong, the user couldn't register on the server DB.";
+    header("Location: FeedPage.php");
+}
+
+function sendError($errorMsg){
+    $errorMsg = addslashes($errorMsg);
+    $_SESSION['error'] = $errorMsg;
     header("Location: FeedPage.php");
 }
