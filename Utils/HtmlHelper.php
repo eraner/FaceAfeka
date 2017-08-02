@@ -63,7 +63,8 @@ function AddTopNavigationBar($loggedUser){
 
     echo "</li>
                     <li><a class='avatar'>
-                        Hi ".$loggedUser." <img class='avatar' src=\"".$userProfileImgSrc."\"> </a>
+                        Hi ".$loggedUser." <img class='avatar' src=\"$userProfileImgSrc\" 
+                                    onclick=\"EnlargeImg('$userProfileImgSrc')\"> </a>
                     </li>
                     <li><a href='#' class='logout' onclick='document.location.href=\"../Login/Logout.php\"'>
                         <span class=\"glyphicon glyphicon-log-out\"></span>  Logout</a> 
@@ -163,7 +164,7 @@ function printSinglePost(PostDetails $post, $loggedUser){
     foreach ($imgs as $img_src){
         if ($img_src != ""){
             $actualSrc = UPLOADED_IMAGES_LOCATION.$img_src."";
-            $imgs_print .= "<img onclick='EnlargeImg(\"$actualSrc\")' src=\"" . UPLOADED_THUMBS_LOCATION . $img_src . "\" alt=\"photo\">";
+            $imgs_print .= "<img class='thumb' onclick='EnlargeImg(\"$actualSrc\")' src=\"" . UPLOADED_THUMBS_LOCATION . $img_src . "\" alt=\"photo\">";
         }
     }
     if ($imgs_print != ""){ //there is images in the post
@@ -221,9 +222,7 @@ EOT;
                     <div class="postLayout">
 
                         <div class="postLayout-left">
-                            <a href="">
-                                <img src="$userProfileSrc" class="postLayout-object">
-                            </a>
+                                <img src="$userProfileSrc" onclick="EnlargeImg('$userProfileSrc')" class="postLayout-object"/>
                         </div>
                         <div class="postLayout-header-body">
                             <div class="postLayout-heading"><a class="user">$post->publisher</a></div>
@@ -303,9 +302,7 @@ function GetCommentSection($post){
         $temp = <<<EOT
         <li class="postLayout">
                         <div class="postLayout-left">
-                            <a href="">
                                 <img src="$userImgSrc" class="commenter-img">
-                            </a>
                         </div>
                         <div class="postLayout-body">
                             <a class="author">$comment->username</a>

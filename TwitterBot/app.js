@@ -76,6 +76,7 @@ function InsertNewTwit(twitID) {
         console.log("INSERTED to DB new TwitID!");
     });
 }
+
 function AnalyzeNewTwit(twitText){
     var parameters = {
         'text' : twitText,

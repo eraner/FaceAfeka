@@ -42,15 +42,22 @@ CREATE TABLE Posts(
   PRIMARY KEY (PostID)
 );
 
+INSERT INTO Posts (Status, ImgSrc, Publisher, Privacy, Likes, Date) VALUES
+  ('Check out my new dog.', '20170719153646889933074.jpg', 'Eran Laudin', 'Public', 3, '2017-07-15 15:00:00');
 INSERT INTO Posts (Status, ImgSrc, Publisher, Privacy, Date) VALUES
-  ('This is a dog status.', '20170719153646889933074.jpg', 'Eran Laudin', 'Public', '2017-07-15 15:00:00');
+  ('Hi, Nice social media site!!!111', '', 'Eran Laudin', 'Public', '2017-07-13 20:05:32');
 INSERT INTO Posts (Status, ImgSrc, Publisher, Privacy, Date) VALUES
-  ('MyStatus before', '', 'Eran Laudin', 'Public', '2017-07-13 20:05:32');
-INSERT INTO Posts (Status, ImgSrc, Publisher, Privacy, Date) VALUES
-  ('This is a cat status', '201707181724441840804854.png', 'Ohad Cohen', 'Public', '2017-07-14 14:22:22');
+  ('Hi all!!! ', '20170802082013329100044.jpg', 'Ohad Cohen', 'Public', '2017-08-02 11:20:13');
 INSERT INTO Posts (Status, ImgSrc, Publisher, Privacy, Date) VALUES
   ('Hello World', '201707141001241501264039.png', 'Ohad Cohen', 'Public', '2017-07-17 20:12:38');
-
+INSERT INTO Posts (Status, ImgSrc, Publisher, Privacy, Likes, Date) VALUES
+  ('10x for Flying Elal!!!', '20170802082900665324044.jpg', 'Eran Laudin', 'Public', 5, '2017-08-02 11:29:00');
+INSERT INTO Posts (Status, ImgSrc, Publisher, Privacy, Date) VALUES
+  ('Check out these cats', '201708020832561902089794.jpg,201708020832561822314670.jpg,201708020832561324818640.jpg,201708020832561415692796.jpg,20170802083256967313685.jpg,20170802083256244411133.jpg', 'Eran Laudin', 'Public', '2017-08-02 11:32:56');
+INSERT INTO Posts (Status, ImgSrc, Publisher, Privacy, Date) VALUES
+  ('Amazing job by Omri Casspi,\nSigning for GS Warriors!', '20170802083426506134689.jpg', 'Nir Levi', 'Public', '2017-08-02 11:32:56');
+INSERT INTO Posts (Status, ImgSrc, Publisher, Privacy, Likes, Date) VALUES
+  ('Don''t worry be happy :)', '20170802083610173877906.jpg', 'Yael Gersh', 'Public', 2, '2017-08-02 11:36:10');
 
 CREATE TABLE Comments(
   PostID INTEGER UNSIGNED NOT NULL,
