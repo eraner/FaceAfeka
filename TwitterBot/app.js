@@ -40,6 +40,8 @@ con.connect(function(err) {
 
 var Twit = new Twit(config);
 
+//setting the time interval for function retweet.
+setInterval(Repost, 1000*30);
 Repost();
 
 function Repost() {
@@ -47,18 +49,19 @@ function Repost() {
 }
 
 function FoundTwit(err, data, response) {
-    //q: 'banana since:2011-11-11', count: 100
+
+    console.log("\n##############################Found Twit##############################\n")
     var twitID = data[0].id;
     var twitText = data[0].text;
-    console.log(twitID);
     var query = "SELECT * FROM Twits_id WHERE TwitID = "+twitID+";";
     con.query(query, function (err, result) {
         if(err) throw err;
         if(result != 0) {
+            console.log("Didn't find new twit! Trying again in few seconds...");
             return;
         }else{
-            console.log("Twit " + twitID + " doesn't exist, handling the new twit....");
-            //InsertNewTwit(twitID);
+            console.log("FOUND new Twit!!\nTwitID: "+twitID);
+            InsertNewTwit(twitID);
             AnalyzeNewTwit(twitText);
         }
 
@@ -70,7 +73,7 @@ function InsertNewTwit(twitID) {
     var query = "INSERT INTO Twits_id (TwitID) VALUES ("+twitID+");";
     con.query(query, function (err, result) {
         if(err) throw err;
-        console.log("Inserted to DB new TwitID!");
+        console.log("INSERTED to DB new TwitID!");
     });
 }
 function AnalyzeNewTwit(twitText){
@@ -84,12 +87,16 @@ function AnalyzeNewTwit(twitText){
             }
         }
     };
-    console.log(parameters);
 
     nlu.analyze(parameters, function (err, response) {
         if(err) throw err;
+        console.log("ANALYZED the Twit");
 
-        // console.log(JSON.stringify(response, null, 2));
+        if(response.keywords.length == 0){
+            console.log("Didn't find keywords..");
+            return;
+        }
+
         var keyWords = "";
         for(var i=0 ; i < response.keywords.length ; i++)
             keyWords += response.keywords[i].text + " ";
@@ -98,12 +105,12 @@ function AnalyzeNewTwit(twitText){
         /**Function to search and download apropriate image*/
         var imgDownloader = require('./ImageDownloader');
         var path = imgDownloader.downloadImageByString(keyWords);
-        console.log(path);
-
+        console.log("Found an image: " + path);
 
         /**Upload new post to FaceAfeka.*/
+        console.log("Uploading the Post to FaceAfeka...");
         UploadBotPost(path, twitText);
-    })
+    });
 }
 
 function UploadBotPost(imgSrc, twitText) {
@@ -112,36 +119,30 @@ function UploadBotPost(imgSrc, twitText) {
     var loggedUser = LOGGED_USER;
     var imgSrc = imgSrc;
 
+    /**Preparing the image to upload to FaceAfeka*/
     var easyImage = require('easyimage');
     var now = new Date();
     var temp = imgSrc.split(".");
     var len = temp.length;
     var name = dateFormat(now, 'yyyymmddHHMMss') + "." + temp[len-1];
-    console.log(name);
-    console.log(dest);
-    console.log(imgSrc);
+
     var dest = '..\\Resources\\UploadedImgs\\'+name;
     fs.rename(imgSrc,dest);
     var src = dest;
 
-    dest = '..\\Resources\\Thumbs\\'+name ;
-    easyImage.resize({src: src, dst: dest,
-                        width: 100, height: 100})
-        .then(
-            function (image) {
+    dest = '..\\Resources\\Thumbs\\'+name;
+    easyImage.resize({src: src, dst: dest, width: 100, height: 100})
+        .then(function (image) {
                 console.log("resized success");
-            }
-        ,
-        function (err) {
-
-    });
+        });
+    /**Uploading the post to FaceAfeka DB*/
     status = addslashes(status);
+    loggedUser = addslashes(loggedUser);
     var query = "INSERT INTO Posts (Status, ImgSrc, Publisher, Privacy, Date) VALUES "
     + "('" + status +"', '"+ name +"', '" + loggedUser + "', '"+ privacy + "', now());";
-    console.log(query);
     con.query(query, function (err, result) {
         if(err) throw err;
-        console.log("Inserted new Post");
+        console.log("\n----SUCCESSFULLY Uploaded the new Post----\n");
     });
 }
 
